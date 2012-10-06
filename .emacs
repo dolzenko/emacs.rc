@@ -36,10 +36,10 @@
 (put 'narrow-to-region 'disabled nil)
 
 (if (eq system-type 'windows-nt)
-    (add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
+    (add-to-list 'default-frame-alist '(font . "Consolas"))
   )
 (if (eq system-type "gnu/linux")
-    (add-to-list 'default-frame-alist '(font . "Consolas"))
+    (add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
   )
 
 ;;;;;;;;;;;;;

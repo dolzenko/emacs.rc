@@ -22,7 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "SystemWindow" :foreground "SystemWindowText" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "outline" :family "Consolas"))))
+ ;; '(default ((t (:inherit nil :stipple nil :background "SystemWindow" :foreground "SystemWindowText" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "outline" :family "Consolas"))))
  '(compilation-info ((((class color) (min-colors 16) (background light)) nil)))
  '(dired-directory ((t (:foreground "blue"))))
  '(font-lock-comment-face ((((class color) (min-colors 16) (background light)) (:foreground "green4"))))
@@ -92,8 +92,8 @@
 (setenv "PATH" (concat "C:\\cygwin\\bin;" (getenv "PATH")))
 
 ;; package.el (loads packages)
-(when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; (when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; Allow loading manually installed extensions
 (add-to-list 'load-path (concat user-emacs-directory "misc"))
@@ -600,11 +600,7 @@
    (concat "/e,/select," (convert-standard-filename buffer-file-name))))
 (put 'gomoku 'disabled t)
 
-
 (kill-buffer "*scratch*")
-;; ;; Cd to projects dir - ugly
-(cd "z:/")
-
 
 (defun goto-lua-spec ()
   "toggles between Lua spec and tested code"

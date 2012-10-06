@@ -628,7 +628,9 @@
 ;; From Emacs wiki
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 ;; MS Windows clipboard is UTF-16LE
-(set-clipboard-coding-system 'utf-16le-dos)
+;; (if (eq system-type 'windows-nt)
+;;   (set-clipboard-coding-system 'utf-16le-dos)
+;; )
 
 
 ;; I don't need overwrite mode

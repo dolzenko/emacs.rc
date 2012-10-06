@@ -22,7 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "beige" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "outline"))))
+ '(default ((t (:inherit nil :stipple nil :background "#eeeee0" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "outline"))))
  '(compilation-info ((((class color) (min-colors 16) (background light)) nil)))
  '(dired-directory ((t (:foreground "blue"))))
  '(font-lock-comment-face ((((class color) (min-colors 16) (background light)) (:foreground "green4"))))

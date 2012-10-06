@@ -631,7 +631,7 @@
 ;; (if (eq system-type 'windows-nt)
 ;;   (set-clipboard-coding-system 'utf-16le-dos)
 ;; )
-;; ahaha
+
 
 ;; I don't need overwrite mode
 (define-key global-map [(insert)] nil) ;; Didn't work, see below

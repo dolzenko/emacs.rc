@@ -92,8 +92,8 @@
 (setenv "PATH" (concat "C:\\cygwin\\bin;" (getenv "PATH")))
 
 ;; package.el (loads packages)
-;; (when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
-;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 ;; Allow loading manually installed extensions
 (add-to-list 'load-path (concat user-emacs-directory "misc"))

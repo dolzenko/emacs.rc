@@ -22,7 +22,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#eeeee0" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "outline"))))
+ '(default ((t (:inherit nil :stipple nil :background "#eeeee0" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "outline"))))
  '(compilation-info ((((class color) (min-colors 16) (background light)) nil)))
  '(dired-directory ((t (:foreground "blue"))))
  '(font-lock-comment-face ((((class color) (min-colors 16) (background light)) (:foreground "green4"))))
@@ -35,11 +35,13 @@
  '(js2-external-variable ((t (:weight bold)))))
 (put 'narrow-to-region 'disabled nil)
 
-(if (eq system-type 'windows-nt)
+(when (eq system-type 'windows-nt)
     (add-to-list 'default-frame-alist '(font . "Consolas"))
+  (set-face-attribute 'default nil :height 130)
   )
 (if (eq system-type "gnu/linux")
     (add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
+  (set-face-attribute 'default nil :height 140)
   )
 
 ;;;;;;;;;;;;;

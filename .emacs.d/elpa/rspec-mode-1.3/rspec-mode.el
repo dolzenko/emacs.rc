@@ -354,7 +354,7 @@
 
 (defun rspec-default-options ()
   (if (rspec2-p)
-      "--format documentation"
+      ""
     (concat "--format specdoc " "--reverse")))
 
 (defun rspec-spec-opts-file ()

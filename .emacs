@@ -10,13 +10,17 @@
  '(grep-find-ignored-files (quote ("*.bak")))
  '(ido-enable-flex-matching t)
  '(ido-max-work-file-list 50)
+ '(rspec-spec-command "rspec")
+ '(rspec-use-bundler-when-possible nil)
+ '(rspec-use-opts-file-when-available nil)
+ '(rspec-use-rake-flag nil)
+ '(rspec-use-rvm t)
  '(safe-local-variable-values (quote ((folded-file . t) (encoding . utf-8))))
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
  '(smtpmail-smtp-server "smtp.googlemail.com")
  '(smtpmail-smtp-service 25)
  '(tool-bar-mode nil))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -25,6 +29,7 @@
  '(default ((t (:inherit nil :stipple nil :background "#eeeee0" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "outline"))))
  '(compilation-info ((((class color) (min-colors 16) (background light)) nil)))
  '(dired-directory ((t (:foreground "blue"))))
+ '(flymake-errline ((t (:underline "orange red"))))
  '(font-lock-comment-face ((((class color) (min-colors 16) (background light)) (:foreground "green4"))))
  '(font-lock-constant-face ((((class color) (min-colors 16) (background light)) (:foreground "red2"))))
  '(font-lock-function-name-face ((((class color) (min-colors 16) (background light)) (:foreground "Blue" :slant italic))))
@@ -33,15 +38,56 @@
  '(font-lock-type-face ((t nil)))
  '(font-lock-variable-name-face ((((class color) (min-colors 16) (background light)) (:foreground "maroon4" :weight bold))))
  '(js2-external-variable ((t (:weight bold)))))
-(put 'narrow-to-region 'disabled nil)
+
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(blink-cursor-mode nil)
+;;  '(bmkp-last-as-first-bookmark-file "c:\\Users\\evgeniy\\AppData\\Roaming\\.emacs.bmk")
+;;  '(fill-column 120)
+;;  '(grep-find-ignored-directories (quote (".git")))
+;;  '(grep-find-ignored-files (quote ("*.bak")))
+;;  '(safe-local-variable-values (quote ((folded-file . t) (encoding . utf-8))))
+;;  '(send-mail-function (quote smtpmail-send-it))
+;;  '(show-paren-mode t)
+;;  '(smtpmail-smtp-server "smtp.googlemail.com")
+;;  '(smtpmail-smtp-service 25)
+;;  '(tool-bar-mode nil))
+
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(default ((t (:inherit nil :stipple nil :background "#eeeee0" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "outline"))))
+;;  '(compilation-info ((((class color) (min-colors 16) (background light)) nil)))
+;;  '(dired-directory ((t (:foreground "blue"))))
+;;  '(font-lock-comment-face ((((class color) (min-colors 16) (background light)) (:foreground "green4"))))
+;;  '(font-lock-constant-face ((((class color) (min-colors 16) (background light)) (:foreground "red2"))))
+;;  '(font-lock-function-name-face ((((class color) (min-colors 16) (background light)) (:foreground "Blue" :slant italic))))
+;;  '(font-lock-keyword-face ((((class color) (min-colors 16) (background light)) (:foreground "blue4" :weight bold))))
+;;  '(font-lock-string-face ((((class color) (min-colors 16) (background light)) (:foreground "tomato4" :weight bold))))
+;;  '(font-lock-type-face ((t nil)))
+;;  '(font-lock-variable-name-face ((((class color) (min-colors 16) (background light)) (:foreground "maroon4" :weight bold))))
+;;  '(js2-external-variable ((t (:weight bold)))))
+;; (put 'narrow-to-region 'disabled nil)
 
 (when (eq system-type 'windows-nt)
     (add-to-list 'default-frame-alist '(font . "Consolas"))
   (set-face-attribute 'default nil :height 130)
+  ;; Cygwin for find/grep
+  (setenv "PATH" (concat "C:\\cygwin\\bin;" (getenv "PATH")))
+
   )
 (if (eq system-type "gnu/linux")
     (add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
   (set-face-attribute 'default nil :height 140)
+  (setq ring-bell-function (lambda ()
+                             (call-process "play" nil 0 nil
+                                           "/usr/share/sounds/gnome/default/alerts/glass.ogg")))
+
   )
 
 ;;;;;;;;;;;;;
@@ -70,7 +116,7 @@
 
 ;; Focus buffers list on C-x C-b (no idea why this is not default)
 (defun list-buffers-and-other-window () (interactive) (call-interactively 'list-buffers) (call-interactively 'other-window))
-(global-set-key (kbd "C-x C-b") 'list-buffers-and-other-window)
+(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 
 ;; Quick buffer kill
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
@@ -78,8 +124,7 @@
 ;; Need to try that for a while
 (global-set-key (kbd "C-c b") 'bury-buffer)
 
-(global-set-key (kbd "C-c t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
-(global-set-key (kbd "C-c C-t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
+
 
 ;; Juicy fingers make me press C-x f instead of C-x C-f
 (global-set-key (kbd "C-x f") 'ido-find-file)
@@ -97,12 +142,23 @@
 ;; "Standard selection" - replace the region just by typing , and kill the selected just with Backspace key
 (delete-selection-mode 1)
 
-;; Cygwin for find/grep
-(setenv "PATH" (concat "C:\\cygwin\\bin;" (getenv "PATH")))
+
 
 ;; package.el (loads packages)
 (when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+;; Rinari
+(add-to-list 'load-path "~/emacs.rc/rinari")
+(require 'rinari)
+(setq rinari-tags-file-name "TAGS")
+
+(global-set-key (kbd "C-c t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
+(global-set-key (kbd "C-c C-t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
+(custom-set-variables '(rspec-use-bundler-when-possible nil)
+                      '(rspec-use-rake-flag t)
+                      '(rspec-use-rvm t)
+                      )
 
 ;; Allow loading manually installed extensions
 (add-to-list 'load-path (concat user-emacs-directory "misc"))
@@ -122,7 +178,9 @@
       ido-use-filename-at-point 'guess
       ido-use-virtual-buffers t
       ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 10)
+      ido-max-prospects 7
+      ido-max-directory-size 100000
+      ido-max-work-file-list 50)
 
 ;; IDO for commands
 (require 'smex)
@@ -673,6 +731,104 @@
   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
+;; TODO also want (back-to-indentation) (next-line) after applied on single line, so that
+;; multiple lines can be commented by pressing M-; repeatedly
 (global-set-key "\M-;" 'comment-dwim-line)
+
+(require 'rvm)
+(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+
+(defun clear-shell ()
+  (interactive)
+  (let ((comint-buffer-maximum-size 0))
+    (comint-truncate-buffer)))
+
+(setq comint-buffer-maximum-size 10240)
+(add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
+
+(require 'thingatpt)
+(require 'thing-cmds)
+
+;; When working with tabular data
+;; (global-hl-line-mode 1)
+
+;; (setq visible-bell 1)
+
+;; (ctags-update-minor-mode 1)
+
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(require 'flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+(require 'flymake-lua)
+(add-hook 'lua-mode-hook 'flymake-lua-load)
+(require 'http-twiddle)
+
+(require 'restclient)
+
+(defun rspec-default-options ()
+  (if (rspec2-p)
+      ""
+    (concat "--format specdoc " "--reverse")))
+
+(load-library "markerpen")
+
+;; Could be better
+(defun esk-sudo-edit (&optional arg)
+  (interactive "p")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+
+;; TODO
+;; (setq clean-buffer-list-delay-general 0.2)
+;; Supposedly should clear buffers older than 24 hours every 'midnight' (4:30am)
+(setq clean-buffer-list-delay-special (* 24 3600))
+(require 'midnight)
+(midnight-delay-set 'midnight-delay "4:30am")
+
+(defun run-current-file ()
+  "Execute or compile the current file.
+For example, if the current buffer is the file x.pl,
+then it'll call “perl x.pl” in a shell.
+The file can be PHP, Perl, Python, Ruby, JavaScript, Bash, ocaml, vb, elisp.
+File suffix is used to determine what program to run."
+(interactive)
+(save-some-buffers (not compilation-ask-about-save)
+                   compilation-save-buffers-predicate)
+  (let (suffixMap fName suffix progName cmdStr)
+
+    ;; a keyed list of file suffix to comand-line program path/name
+    (setq suffixMap
+          '(
+            ("php" . "php")
+            ("pl" . "perl")
+            ("py" . "python")
+            ("rb" . "ruby")
+            ("js" . "js")
+            ("sh" . "bash")
+            ("ml" . "ocaml")
+            ("vbs" . "cscript")
+;            ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
+            )
+          )
+
+    (setq fName (buffer-file-name))
+    (setq suffix (file-name-extension fName))
+    (setq progName (cdr (assoc suffix suffixMap)))
+    (setq cmdStr (concat progName " \""   fName "\""))
+
+    (if (string-equal suffix "el") ; special case for emacs lisp
+        (load-file fName)
+      (if progName
+        (progn
+          (message "Running…")
+          (shell-command cmdStr "*run-current-file output*" )
+          )
+        (message "No recognized program file suffix for this file.")
+        )
+)))
+
 
 (load "~/.emacs.private")

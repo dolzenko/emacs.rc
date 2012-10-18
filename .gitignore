@@ -1,1 +1,8 @@
 .emacs.private
+*.elc
+lastdir
+session.*
+.emacs.d/var/pcache
+tramp
+bookmarks
+*~

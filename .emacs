@@ -26,7 +26,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#eeeee0" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "outline"))))
+ '(default ((t (:inherit nil :stipple nil :background "#aaaaae" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal :foundry "outline"))))
  '(compilation-info ((((class color) (min-colors 16) (background light)) nil)))
  '(dired-directory ((t (:foreground "blue"))))
  '(flymake-errline ((t (:underline "orange red"))))
@@ -83,7 +83,7 @@
   )
 (if (eq system-type "gnu/linux")
     (add-to-list 'default-frame-alist '(font . "Ubuntu Mono"))
-  (set-face-attribute 'default nil :height 140)
+  (set-face-attribute 'default nil :height 130)
   (setq ring-bell-function (lambda ()
                              (call-process "play" nil 0 nil
                                            "/usr/share/sounds/gnome/default/alerts/glass.ogg")))
@@ -296,8 +296,8 @@
 (require 'autopair)
 ;; TODO breaks in LESS files
 ;; TODO add '|' to autopair for ruby
-(autopair-global-mode) ;; enable autopair in all buffers
-;; (add-hook 'ruby-mode-common-hook #'(lambda () (autopair-mode)))
+;; (autopair-global-mode) ;; enable autopair in all buffers
+(add-hook 'ruby-mode-common-hook #'(lambda () (autopair-mode)))
 
 
 (require 'haml-mode)
@@ -550,7 +550,7 @@
 
 ;; (global-set-key (kbd "C-c g") 'magit-status)
 
-;; ;; Set to t for debugging
+;; Set to t for debugging
 ;; (add-hook 'after-init-hook
 ;;           '(lambda () (setq debug-on-error t)))
 
@@ -810,6 +810,7 @@ File suffix is used to determine what program to run."
             ("sh" . "bash")
             ("ml" . "ocaml")
             ("vbs" . "cscript")
+            ("lua" . "lua")
 ;            ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
             )
           )
@@ -830,5 +831,65 @@ File suffix is used to determine what program to run."
         )
 )))
 
+;; change magit diff colors
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-del "red3")
+     (when (not window-system)
+       (set-face-background 'magit-item-highlight "black"))))
+
+(defun find-file-at-point-with-line()
+  "if file has an attached line num goto that line, ie boom.rb:12"
+  (interactive)
+  (setq line-num 0)
+  (save-excursion
+    (search-forward-regexp "[^ ]:" (point-max) t)
+    (if (looking-at "[0-9]+")
+        (setq line-num (string-to-number (buffer-substring (match-beginning 0) (match-end 0))))))
+  (find-file-at-point)
+  (if (not (equal line-num 0))
+      (goto-line line-num)))
+
+(defun my-clear ()
+  (interactive)
+  (let ((comint-buffer-maximum-size 0))
+    (comint-truncate-buffer)))
+
+
+;; Make Jabber messages popup standard notification
+(defvar libnotify-program "/usr/bin/notify-send")
+(defun notify-send (title message)
+  (start-process "notify" " notify"
+		 libnotify-program "--expire-time=4000" title message))
+(defun libnotify-jabber-notify (from buf text proposed-alert)
+  "(jabber.el hook) Notify of new Jabber chat messages via libnotify"
+  (when (or jabber-message-alert-same-buffer
+            (not (memq (selected-window) (get-buffer-window-list buf))))
+    (if (jabber-muc-sender-p from)
+        (notify-send (format "(PM) %s"
+                             (jabber-jid-displayname (jabber-jid-user from)))
+                     (format "%s: %s" (jabber-jid-resource from) text)))
+    (notify-send (format "%s" (jabber-jid-displayname from))
+                 text)))
+(add-hook 'jabber-alert-message-hooks 'libnotify-jabber-notify)
+
+;; 'Fix' 'WARNING: terminal is not fully functional' from less/etc.
+(setenv "PAGER" "cat")
+
+;; Focus follows mouse
+(setq mouse-autoselect-window t)
+
+(require 'gist)
+
+(defun toggle-fullscreen ()
+  "Toggle full screen on X11"
+  (interactive)
+  (when (eq window-system 'x)
+    (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
+
+(global-set-key [f11] 'toggle-fullscreen)
 
 (load "~/.emacs.private")

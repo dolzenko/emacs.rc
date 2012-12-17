@@ -889,7 +889,35 @@ File suffix is used to determine what program to run."
     (set-frame-parameter
      nil 'fullscreen
      (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
-
 (global-set-key [f11] 'toggle-fullscreen)
+
+;; Show current directory in modeline in shell mode
+(defun add-mode-line-dirtrack ()
+  (add-to-list 'mode-line-buffer-identification
+               '(:propertize (" " default-directory " ") face dired-directory)))
+(add-hook 'shell-mode-hook 'add-mode-line-dirtrack)
+
+
+;; Show last two directories to the current file in modeline
+(defun add-ff-mode-line-dirtrack ()
+  "When editing a file, show the last 2 directories of the current path in the mode line."
+  (add-to-list 'mode-line-buffer-identification
+               '(:eval (substring default-directory
+                                  (+ 1 (string-match "/[^/]+/[^/]+/$" default-directory)) nil))))
+(add-hook 'find-file-hook 'add-ff-mode-line-dirtrack)
+
+;; Remember/switch window layouts with C-c left/right
+(winner-mode 1)
+
+;; to get face: c-u c-x =
+
+(set-background-color "cornsilk")
+
+(require 're-builder)
+(setq reb-re-syntax 'string)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x C-g") 'magit-status)
+(global-set-key (kbd "C-x C-a") 'ack-and-a-half)
 
 (load "~/.emacs.private")

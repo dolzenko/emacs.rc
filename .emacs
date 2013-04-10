@@ -121,9 +121,13 @@
 ;; Quick buffer kill
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
-;; Need to try that for a while
-(global-set-key (kbd "C-c b") 'bury-buffer)
+;; So that C-x C-o works the same as C-x o
+(global-set-key (kbd "C-x C-o") 'other-window)
 
+;; 1. Browsed directory tree with dired producing some buffers
+;; 2. Switched to Jabber
+;; 3. Now to close all the dired buffers - bury-buffer (buries Jabber), then kill-buffer few times
+(global-set-key (kbd "C-c b") 'bury-buffer)
 
 
 ;; Juicy fingers make me press C-x f instead of C-x C-f
@@ -249,6 +253,11 @@
 
 ;; Load Markdown on *.md files
 (setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+
+(require 'dired-x)
+(setq-default dired-omit-files-p t) ;; this is buffer-local variable
+(setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+(setq dired-listing-switches "-lXGh --group-directories-first") ;; C-u s while in a Dired buffer will prompt you for new `ls` switches
 
 ;; Jabber
 (add-to-list 'load-path (concat user-emacs-directory "misc/emacs-jabber-0.8.91"))
@@ -462,16 +471,23 @@
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
+
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+(setq lua-electric-flag nil)
 (setq lua-indent-level 2)
 
-(defun my-lua-undef-keys () ((define-key lua-mode-map "}" nil)
-                             (define-key lua-mode-map "]" nil)
-                             (define-key lua-mode-map ")" nil)))
-          ;;            ;;
-          ;;            ;; )))
+;; (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+;; (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+;; (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+;; (setq lua-indent-level 2)
+
+;; (defun my-lua-undef-keys () ((define-key lua-mode-map "}" nil)
+;;                              (define-key lua-mode-map "]" nil)
+;;                              (define-key lua-mode-map ")" nil)))
+;;           ;;            ;;
+;;           ;;            ;; )))
 
 ;; (add-hook 'lua-mode-hook
 ;;           (lambda () (unless (fboundp 'lua-calculate-indentation-right-shift-next)
@@ -684,21 +700,21 @@
 ;;             (flyspell-mode 1)))
 
 
-;;;;;;;;;;;;;;;;;;;;
-;; set up unicode
-(prefer-coding-system       'utf-8)
-(set-default-coding-systems 'utf-8)
+;; set up Unicode
+;; http://stackoverflow.com/questions/1674481/how-to-configure-gnu-emacs-to-write-unix-or-dos-formatted-files-by-default
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 ;; This from a japanese individual.  I hope it works.
-(setq default-buffer-file-coding-system 'utf-8)
+(set-default buffer-file-coding-system 'utf-8-unix)
 ;; From Emacs wiki
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 ;; MS Windows clipboard is UTF-16LE
 ;; (if (eq system-type 'windows-nt)
 ;;   (set-clipboard-coding-system 'utf-16le-dos)
 ;; )
-
+(set-default default-buffer-file-coding-system 'utf-8-unix)
 
 ;; I don't need overwrite mode
 (define-key global-map [(insert)] nil) ;; Didn't work, see below
@@ -742,6 +758,7 @@
   (interactive)
   (let ((comint-buffer-maximum-size 0))
     (comint-truncate-buffer)))
+
 
 (setq comint-buffer-maximum-size 10240)
 (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
@@ -881,6 +898,7 @@ File suffix is used to determine what program to run."
 (setq mouse-autoselect-window t)
 
 (require 'gist)
+(setq gist-view-gist t)
 
 (defun toggle-fullscreen ()
   "Toggle full screen on X11"
@@ -920,4 +938,13 @@ File suffix is used to determine what program to run."
 (global-set-key (kbd "C-x C-g") 'magit-status)
 (global-set-key (kbd "C-x C-a") 'ack-and-a-half)
 
+(setq enable-recursive-minibuffers t)
+(minibuffer-depth-indicate-mode 99)
+
 (load "~/.emacs.private")
+
+
+(setq gnus-select-method '(nnimap "gmail"
+                                  (nnimap-address "imap.gmail.com")
+                                  (nnimap-server-port 993)
+                                  (nnimap-stream ssl)))

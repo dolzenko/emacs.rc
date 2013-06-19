@@ -14,8 +14,7 @@
  '(rspec-use-bundler-when-possible nil)
  '(rspec-use-opts-file-when-available nil)
  '(rspec-use-rake-flag nil)
- '(rspec-use-rvm t)
- '(safe-local-variable-values (quote ((folded-file . t) (encoding . utf-8))))
+  '(safe-local-variable-values (quote ((folded-file . t) (encoding . utf-8))))
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
  '(smtpmail-smtp-server "smtp.googlemail.com")
@@ -124,11 +123,7 @@
 ;; So that C-x C-o works the same as C-x o
 (global-set-key (kbd "C-x C-o") 'other-window)
 
-;; 1. Browsed directory tree with dired producing some buffers
-;; 2. Switched to Jabber
-;; 3. Now to close all the dired buffers - bury-buffer (buries Jabber), then kill-buffer few times
 (global-set-key (kbd "C-c b") 'bury-buffer)
-
 
 ;; Juicy fingers make me press C-x f instead of C-x C-f
 (global-set-key (kbd "C-x f") 'ido-find-file)
@@ -161,7 +156,6 @@
 (global-set-key (kbd "C-c C-t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
 (custom-set-variables '(rspec-use-bundler-when-possible nil)
                       '(rspec-use-rake-flag t)
-                      '(rspec-use-rvm t)
                       )
 
 ;; Allow loading manually installed extensions
@@ -252,7 +246,11 @@
 (require 'ruby-end)
 
 ;; Load Markdown on *.md files
-(setq auto-mode-alist (cons '("\\.md" . markdown-mode) auto-mode-alist))
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (require 'dired-x)
 (setq-default dired-omit-files-p t) ;; this is buffer-local variable
@@ -751,8 +749,12 @@
 ;; multiple lines can be commented by pressing M-; repeatedly
 (global-set-key "\M-;" 'comment-dwim-line)
 
-(require 'rvm)
-(rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+;; (require 'rvm)
+;; (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+
+(require 'rbenv)
+(global-rbenv-mode)
+(setq rbenv-show-active-ruby-in-modeline nil)
 
 (defun clear-shell ()
   (interactive)
@@ -948,3 +950,29 @@ File suffix is used to determine what program to run."
                                   (nnimap-address "imap.gmail.com")
                                   (nnimap-server-port 993)
                                   (nnimap-stream ssl)))
+
+
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+
+
+(require 'tramp)
+(defun tramp-set-auto-save ()
+  (auto-save-mode -1))
+
+
+(defun url-decode-region (start end)
+  "Replace a region with the same contents, only URL decoded."
+  (interactive "r")
+  (let ((text (url-unhex-string (buffer-substring start end))))
+    (delete-region start end)
+    (insert text)))
+
+(defun multi-occur-in-all-buffers (regexp)
+  (interactive "sRegexp: ")
+  (multi-occur-in-matching-buffers "." regexp t))
+
+(require 'shell-switcher)
+(setq shell-switcher-new-shell-function 'shell-switcher-make-shell)
+(setq shell-switcher-mode t)

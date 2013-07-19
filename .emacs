@@ -976,3 +976,38 @@ File suffix is used to determine what program to run."
 (require 'shell-switcher)
 (setq shell-switcher-new-shell-function 'shell-switcher-make-shell)
 (setq shell-switcher-mode t)
+
+(setq wdired-allow-to-change-permissions t)
+
+
+
+(loop
+  for from across "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖ\ЭЯЧСМИТЬБЮ№"
+  for to   across "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>#"
+  do
+  (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat "C-" (string to)))))
+  (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat "M-" (string to))))))
+
+(defun save-all-and-recompile ()
+  (save-some-buffers 1)
+  (recompile))
+
+(require 'key-chord)
+(key-chord-define-global "qt" 'rspec-toggle-spec-and-target)
+(key-chord-define-global "qr" 'recompile)
+(key-chord-define-global "qs" 'save-buffer)
+(key-chord-define-global "qc" 'rspec-verify)
+(key-chord-define-global "qk" 'kill-this-buffer)
+(key-chord-define-global "qj" 'prelude-switch-to-previous-buffer)
+(key-chord-define-global "qf" 'find-file)
+(key-chord-define-global "qb" 'ido-switch-buffer)
+(key-chord-define-global "qg" 'magit-status)
+(key-chord-define-global "qe" 'jabber-activity-switch-to)
+(key-chord-define-global "qo" 'other-window)
+
+(defun prelude-switch-to-previous-buffer ()
+     "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+     (interactive)
+     (switch-to-buffer (other-buffer (current-buffer) 1)))
+(key-chord-mode +1)

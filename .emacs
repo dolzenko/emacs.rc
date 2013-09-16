@@ -146,6 +146,7 @@
 ;; package.el (loads packages)
 (when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; Rinari
 (add-to-list 'load-path "~/emacs.rc/rinari")
@@ -747,6 +748,7 @@
     (comment-dwim arg)))
 ;; TODO also want (back-to-indentation) (next-line) after applied on single line, so that
 ;; multiple lines can be commented by pressing M-; repeatedly
+;; TODO Very Very terrible choice
 (global-set-key "\M-;" 'comment-dwim-line)
 
 ;; (require 'rvm)
@@ -939,6 +941,7 @@ File suffix is used to determine what program to run."
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x C-g") 'magit-status)
 (global-set-key (kbd "C-x C-a") 'ack-and-a-half)
+(global-set-key (kbd "C-x c") 'recompile)
 
 (setq enable-recursive-minibuffers t)
 (minibuffer-depth-indicate-mode 99)
@@ -992,22 +995,37 @@ File suffix is used to determine what program to run."
   (save-some-buffers 1)
   (recompile))
 
-(require 'key-chord)
-(key-chord-define-global "qt" 'rspec-toggle-spec-and-target)
-(key-chord-define-global "qr" 'recompile)
-(key-chord-define-global "qs" 'save-buffer)
-(key-chord-define-global "qc" 'rspec-verify)
-(key-chord-define-global "qk" 'kill-this-buffer)
-(key-chord-define-global "qj" 'prelude-switch-to-previous-buffer)
-(key-chord-define-global "qf" 'find-file)
-(key-chord-define-global "qb" 'ido-switch-buffer)
-(key-chord-define-global "qg" 'magit-status)
-(key-chord-define-global "qe" 'jabber-activity-switch-to)
-(key-chord-define-global "qo" 'other-window)
+;; (require 'key-chord)
+;; (key-chord-define-global "qt" 'rspec-toggle-spec-and-target)
+;; (key-chord-define-global "qr" 'recompile)
+;; (key-chord-define-global "qs" 'save-buffer)
+;; (key-chord-define-global "qc" 'rspec-verify)
+;; (key-chord-define-global "qk" 'kill-this-buffer)
+;; (key-chord-define-global "qj" 'prelude-switch-to-previous-buffer)
+;; (key-chord-define-global "qf" 'find-file)
+;; (key-chord-define-global "qb" 'ido-switch-buffer)
+;; (key-chord-define-global "qg" 'magit-status)
+;; (key-chord-define-global "qe" 'jabber-activity-switch-to)
+;; (key-chord-define-global "qo" 'other-window)
 
-(defun prelude-switch-to-previous-buffer ()
-     "Switch to previously open buffer.
-Repeated invocations toggle between the two most recently open buffers."
-     (interactive)
-     (switch-to-buffer (other-buffer (current-buffer) 1)))
-(key-chord-mode +1)
+;; (defun prelude-switch-to-previous-buffer ()
+;;      "Switch to previously open buffer.
+;; Repeated invocations toggle between the two most recently open buffers."
+;;      (interactive)
+;;      (switch-to-buffer (other-buffer (current-buffer) 1)))
+;; (key-chord-mode +1)
+
+(load "edit-utils.el")
+
+(setq default-tab-width 2)
+
+
+(global-set-key [M-left] 'windmove-left)          ; move to left windnow
+(global-set-key [M-right] 'windmove-right)        ; move to right window
+(global-set-key [M-up] 'windmove-up)              ; move to upper window
+(global-set-key [M-down] 'windmove-down)          ; move to downer window
+
+(global-set-key (kbd "C-c i") 'inf-ruby)
+(global-set-key (kbd "C-c s") 'rspec-verify-single)
+(global-set-key (kbd "C-c a") 'ack)
+(global-set-key (kbd "C-c r") 'toggle-truncate-lines)

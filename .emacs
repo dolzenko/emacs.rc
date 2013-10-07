@@ -901,6 +901,8 @@ File suffix is used to determine what program to run."
 ;; Focus follows mouse
 (setq mouse-autoselect-window t)
 
+;; Clean broken cache :(
+;; rm -rf ~/.emacs.d/var/pcache/gh/gh-gist-api/dolzenko
 (require 'gist)
 (setq gist-view-gist t)
 
@@ -1029,3 +1031,10 @@ File suffix is used to determine what program to run."
 (global-set-key (kbd "C-c s") 'rspec-verify-single)
 (global-set-key (kbd "C-c a") 'ack)
 (global-set-key (kbd "C-c r") 'toggle-truncate-lines)
+
+(defun align-repeat (start end regexp)
+  "Repeat alignment with respect to
+     the given regular expression."
+  (interactive "r\nsAlign regexp: ")
+  (align-regexp start end
+                (concat "\\(\\s-*\\)" regexp) 1 1 t))

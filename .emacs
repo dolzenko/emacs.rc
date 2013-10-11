@@ -102,7 +102,7 @@
 
 ;; http://stackoverflow.com/questions/683425/globally-override-key-binding-in-emacs/5340797#5340797
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-(define-key my-keys-minor-mode-map (kbd "C-c C-r") 'recentf-open-files) ;; Quick access to recently opened files, questionable
+;; (define-key my-keys-minor-mode-map (kbd "C-c C-r") 'recentf-open-files) ;; Quick access to recently opened files, questionable
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
   t " my-keys" 'my-keys-minor-mode-map)
@@ -136,15 +136,10 @@
     (back-to-indentation)))
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
-;;;;;;;
-;; Else
-;; "Standard selection" - replace the region just by typing , and kill the selected just with Backspace key
-(delete-selection-mode 1)
-
-
-
 ;; package.el (loads packages)
-(when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
+;; (when (load (expand-file-name (concat user-emacs-directory "elpa/package.el"))) (package-initialize))
+(require 'package)
+(package-initialize)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
@@ -777,6 +772,7 @@
 
 ;; (ctags-update-minor-mode 1)
 
+;; Increase selected region by semantic units
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 (require 'flymake-ruby)
@@ -1038,3 +1034,40 @@ File suffix is used to determine what program to run."
   (interactive "r\nsAlign regexp: ")
   (align-regexp start end
                 (concat "\\(\\s-*\\)" regexp) 1 1 t))
+
+(require 'highlight-symbol)
+;; Search at point (aka super star from Vim)
+(global-set-key (kbd "C-*") 'highlight-symbol-next)
+
+;; "Standard selection" - replace the region just by typing , and kill the selected just with Backspace key
+(delete-selection-mode 1)
+
+;; (eval-after-load
+;;     "filecache"
+;;   '(progn
+;;      (message "Loading file cache...")
+;;      (file-cache-add-directory-using-find "~/n")
+;;      (file-cache-add-directory-list load-path)
+;;      (file-cache-add-directory "~/")
+;;      (file-cache-add-file-list (list "~/foo/bar" "~/baz/bar"))
+;;  	   ))
+
+;; M-x file-cache-display
+
+;; Add to file-cache on `kill-buffer'
+(defun file-cache-add-this-file ()
+  (and buffer-file-name
+       (file-exists-p buffer-file-name)
+       (file-cache-add-file buffer-file-name)))
+(add-hook 'kill-buffer-hook 'file-cache-add-this-file)
+
+;; ;; Display ido completions vertically
+;; (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+;; (defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+;; (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+;; (defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+;;   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+;;   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+;; (add-hook 'ido-setup-hook 'ido-define-keys)
+
+(global-undo-tree-mode)

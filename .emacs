@@ -120,9 +120,6 @@
 ;; Quick buffer kill
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
-;; So that C-x C-o works the same as C-x o
-(global-set-key (kbd "C-x C-o") 'other-window)
-
 (global-set-key (kbd "C-c b") 'bury-buffer)
 
 ;; Juicy fingers make me press C-x f instead of C-x C-f
@@ -153,6 +150,12 @@
 (custom-set-variables '(rspec-use-bundler-when-possible nil)
                       '(rspec-use-rake-flag t)
                       )
+
+;; (defun rspec-default-options ()
+;;   (if (rspec2-p)
+;;       ""
+;;     (concat "--format specdoc " "--reverse")))
+
 
 ;; Allow loading manually installed extensions
 (add-to-list 'load-path (concat user-emacs-directory "misc"))
@@ -783,11 +786,6 @@
 
 (require 'restclient)
 
-(defun rspec-default-options ()
-  (if (rspec2-p)
-      ""
-    (concat "--format specdoc " "--reverse")))
-
 (load-library "markerpen")
 
 ;; Could be better
@@ -926,9 +924,6 @@ File suffix is used to determine what program to run."
                                   (+ 1 (string-match "/[^/]+/[^/]+/$" default-directory)) nil))))
 (add-hook 'find-file-hook 'add-ff-mode-line-dirtrack)
 
-;; Remember/switch window layouts with C-c left/right
-(winner-mode 1)
-
 ;; to get face: c-u c-x =
 
 (set-background-color "cornsilk")
@@ -1017,14 +1012,7 @@ File suffix is used to determine what program to run."
 
 (setq default-tab-width 2)
 
-
-(global-set-key [M-left] 'windmove-left)          ; move to left windnow
-(global-set-key [M-right] 'windmove-right)        ; move to right window
-(global-set-key [M-up] 'windmove-up)              ; move to upper window
-(global-set-key [M-down] 'windmove-down)          ; move to downer window
-
 (global-set-key (kbd "C-c i") 'inf-ruby)
-(global-set-key (kbd "C-c s") 'rspec-verify-single)
 (global-set-key (kbd "C-c a") 'ack)
 (global-set-key (kbd "C-c r") 'toggle-truncate-lines)
 
@@ -1071,3 +1059,35 @@ File suffix is used to determine what program to run."
 ;; (add-hook 'ido-setup-hook 'ido-define-keys)
 
 (global-undo-tree-mode)
+
+
+;; 'Visual' window switching (meh)
+(require 'switch-window)
+(global-set-key (kbd "C-x o") 'switch-window)
+
+;; Remember/switch window layouts with C-c left/right
+(winner-mode 1)
+
+(global-set-key [M-left]  'windmove-left)  ; move to left windnow
+(global-set-key [M-right] 'windmove-right) ; move to right window
+(global-set-key [M-up]    'windmove-up)    ; move to upper window
+(global-set-key [M-down]  'windmove-down)  ; move to downer window
+
+;; So that C-x C-o works the same as C-x o
+(global-set-key (kbd "C-x C-o") 'other-window)
+
+(defun move-cursor-next-pane ()
+  "Move cursor to the next pane."
+  (interactive)
+  (other-window 1))
+
+(defun move-cursor-previous-pane ()
+  "Move cursor to the previous pane."
+  (interactive)
+  (other-window -1))
+
+(global-set-key (kbd "C-8") 'move-cursor-next-pane)
+(global-set-key (kbd "C-7") 'move-cursor-previous-pane)
+(global-set-key (kbd "C-9") 'win-swap)
+
+;; Ctrl+x r w/j to remember/switch layout to/from register

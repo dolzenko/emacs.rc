@@ -803,48 +803,55 @@
 (require 'midnight)
 (midnight-delay-set 'midnight-delay "4:30am")
 
+;; http://ergoemacs.org/emacs/elisp_run_current_file.html
 (defun run-current-file ()
-  "Execute or compile the current file.
-For example, if the current buffer is the file x.pl,
-then it'll call “perl x.pl” in a shell.
-The file can be PHP, Perl, Python, Ruby, JavaScript, Bash, ocaml, vb, elisp.
-File suffix is used to determine what program to run."
-(interactive)
-(save-some-buffers (not compilation-ask-about-save)
-                   compilation-save-buffers-predicate)
-  (let (suffixMap fName suffix progName cmdStr)
+  "Execute the current file.
+For example, if the current buffer is the file xx.py,
+then it'll call “python xx.py” in a shell.
+The file can be php, perl, python, ruby, javascript, bash, ocaml, vb, elisp.
+File suffix is used to determine what program to run.
 
-    ;; a keyed list of file suffix to comand-line program path/name
-    (setq suffixMap
-          '(
+If the file is modified, ask if you want to save first.
+
+If the file is emacs lisp, run the byte compiled version if exist."
+  (interactive)
+  (let* (
+         (suffixMap
+          `(
             ("php" . "php")
             ("pl" . "perl")
             ("py" . "python")
+            ("py3" . ,(if (string-equal system-type "windows-nt") "c:/Python32/python.exe" "python3"))
             ("rb" . "ruby")
-            ("js" . "js")
+            ("js" . "node")             ; node.js
             ("sh" . "bash")
             ("ml" . "ocaml")
             ("vbs" . "cscript")
-            ("lua" . "lua")
-;            ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
             )
           )
+         (fName (buffer-file-name))
+         (fSuffix (file-name-extension fName))
+         (progName (cdr (assoc fSuffix suffixMap)))
+         (cmdStr (concat progName " \""   fName "\""))
+         )
 
-    (setq fName (buffer-file-name))
-    (setq suffix (file-name-extension fName))
-    (setq progName (cdr (assoc suffix suffixMap)))
-    (setq cmdStr (concat progName " \""   fName "\""))
+    (when (buffer-modified-p)
+      (when (y-or-n-p "Buffer modified. Do you want to save first?")
+          (save-buffer) ) )
 
-    (if (string-equal suffix "el") ; special case for emacs lisp
-        (load-file fName)
+    (if (string-equal fSuffix "el") ; special case for emacs lisp
+        (load (file-name-sans-extension fName))
       (if progName
-        (progn
-          (message "Running…")
-          (shell-command cmdStr "*run-current-file output*" )
-          )
+          (progn
+            (message "Running…")
+            (shell-command cmdStr "*run-current-file output*" )
+            )
         (message "No recognized program file suffix for this file.")
-        )
-)))
+        ) ) ))
+
+;; Turn off mini window autoresize so that output appear in the separate buffer
+;; even if short (and not discarded immediately)
+(setq resize-mini-windows nil)
 
 ;; change magit diff colors
 (eval-after-load 'magit
@@ -1058,7 +1065,8 @@ File suffix is used to determine what program to run."
 ;;   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 ;; (add-hook 'ido-setup-hook 'ido-define-keys)
 
-(global-undo-tree-mode)
+;; Messes with undo
+;; (global-undo-tree-mode)
 
 
 ;; 'Visual' window switching (meh)
@@ -1091,3 +1099,21 @@ File suffix is used to determine what program to run."
 (global-set-key (kbd "C-9") 'win-swap)
 
 ;; Ctrl+x r w/j to remember/switch layout to/from register
+
+
+(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+
+
+(add-hook 'ruby-mode-hook 'yard-mode)
+(add-hook 'ruby-mode-hook 'eldoc-mode)
+
+(require 'flymake-jslint)
+(add-hook 'js-mode-hook 'flymake-jslint-load)
+
+;; make whitespace-mode use just basic coloring
+(setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+
+;; Zsh in Shell mode - prevent truncated echoed commands from being printed
+(defun my-comint-init ()
+  (setenv "COLUMNS" "999"))
+(add-hook 'comint-mode-hook 'my-comint-init)

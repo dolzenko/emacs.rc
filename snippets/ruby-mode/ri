@@ -1,0 +1,4 @@
+#name : raise ....inspect
+# key: ri
+# --
+raise $0.inspect

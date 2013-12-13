@@ -1,0 +1,5 @@
+#name : ActiveRecord::Base
+#group: ActiveRecord
+# key: arbc
+# --
+ActiveRecord::Base.connection.$0

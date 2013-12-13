@@ -1,0 +1,4 @@
+#name : instance_variable_get(:@...)
+# key: ivg
+# --
+instance_variable_get(:@$0)

@@ -1211,3 +1211,5 @@ Leave point after open-quote."
 (setq comint-process-echoes t)
 
 (eval-after-load 'image-mode '(require 'image-dimensions-minor-mode))
+
+(setq-default fill-column 80)

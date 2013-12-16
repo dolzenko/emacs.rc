@@ -1,0 +1,4 @@
+#name : attr_readonly :...
+# key: aro
+# --
+attr_readonly :$0

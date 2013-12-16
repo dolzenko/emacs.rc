@@ -18,7 +18,7 @@
  '(rspec-use-opts-file-when-available nil)
  '(rspec-use-rake-flag t)
  '(rspec-use-rake-when-possible nil)
- '(safe-local-variable-values (quote ((folded-file . t) (encoding . utf-8))))
+ '(safe-local-variable-values (quote ((require-final-newline) (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby") (folded-file . t) (encoding . utf-8))))
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
  '(smtpmail-smtp-server "smtp.googlemail.com")

@@ -1,0 +1,4 @@
+#name : before_validation :...
+# key: bv
+# --
+before_validation :$0

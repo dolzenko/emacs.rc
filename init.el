@@ -1223,3 +1223,14 @@ If the file is emacs lisp, run the byte compiled version if exist."
                           (local-set-key (kbd "M-.") #'godef-jump)))
 
 (add-hook 'go-mode-hook 'go-eldoc-setup)
+
+;; Monkey-patch to default to "_test" suffix for Go support
+(defun projectile-test-suffix (project-type)
+  "Find test files suffix based on PROJECT-TYPE."
+  (cond
+   ((member project-type '(rails-rspec ruby-rspec)) "_spec")
+   ((member project-type '(rails-test ruby-test lein)) "_test")
+   ((member project-type '(maven symfony)) "Test")
+   (t "_test")))
+
+(require 'git-link)

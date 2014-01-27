@@ -264,13 +264,6 @@
 
 (setq dired-recursive-copies t)
 
-(require 'autopair)
-;; TODO breaks in LESS files
-;; TODO add '|' to autopair for ruby
-;; (autopair-global-mode) ;; enable autopair in all buffers
-(add-hook 'ruby-mode-common-hook #'(lambda () (autopair-mode)))
-
-
 (require 'haml-mode)
 
 ;; E'erybody wanna fuck my indent
@@ -795,6 +788,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
             ("sh" . "bash")
             ("ml" . "ocaml")
             ("vbs" . "cscript")
+            ("go" . "go run")
             )
           )
          (fName (buffer-file-name))
@@ -1085,7 +1079,8 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (defun my-comint-init ()
   (setenv "COLUMNS" "999")
   (setq comint-process-echoes t))
-(add-hook 'comint-mode-hook 'my-comint-init)
+(add-hook 'shell-mode-hook 'my-comint-init)
+(add-hook 'inf-ruby-mode-hook 'my-comint-init)
 
 (global-set-key "\M-l" 'ffap-next)
 
@@ -1128,7 +1123,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (global-set-key "\M-l" 'kill-this-buffer)
 (global-set-key "\M-K" 'kill-this-buffer)
-(global-set-key (kbd "M-o") 'switch-window)
 (global-set-key "\M-O" 'other-window)
 (global-set-key "\M-F" 'ido-find-file)
 (global-set-key "\M-S" 'save-buffer)
@@ -1138,24 +1132,20 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key "\M-N" 'next-buffer)
 (global-set-key "\M-R" 'rspec-verify)
 
-(global-set-key "\M-'" 'insert-quotations)
-(global-set-key "\M-\"" 'insert-quotes)
+(global-set-key "\M-'" 'insert-single-quotes)
+(global-set-key "\M-\"" 'insert-double-quotes)
 
 (global-set-key "\M-G" 'projectile-find-file)
 
-(defun insert-quotations (&optional arg)
-  "Enclose following ARG sexps in quotation marks.
-Leave point after open-paren."
+(defun insert-single-quotes (&optional arg)
+  "Enclose following ARG sexps in quotation marks. Leave point after open-paren."
   (interactive "*P")
   (insert-pair arg ?\' ?\'))
 
-(defun insert-quotes (&optional arg)
-  "Enclose following ARG sexps in quotes.
-Leave point after open-quote."
+(defun insert-double-quotes (&optional arg)
+  "Enclose following ARG sexps in quotes. Leave point after open-quote."
   (interactive "*P")
   (insert-pair arg ?\" ?\"))
-
-(electric-pair-mode 1)
 
 ;; Remove highlight of current section in magit diff
 ;; https://github.com/magit/magit/pull/994/commits
@@ -1208,8 +1198,28 @@ Leave point after open-quote."
   )
 (define-key ruby-mode-map (kbd "C-c C-e") 'ruby-send-line)
 
-(setq comint-process-echoes t)
-
 (eval-after-load 'image-mode '(require 'image-dimensions-minor-mode))
 
-(setq-default fill-column 80)
+;; (require 'auto-complete)
+;; (require 'go-autocomplete)
+;; (require 'auto-complete-config)
+;; (define-key ac-mode-map (kbd "M-?") 'auto-complete)
+
+(require 'xfrp_find_replace_pairs)
+
+(require 'multiple-cursors)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+
+;; Go
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+(add-to-list 'load-path (concat (getenv "GOPATH") "/src/github.com/golang/lint/misc/emacs"))
+(require 'golint)
+
+(load (concat (getenv "GOPATH") "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el"))
+(setq go-oracle-command (concat (getenv "GOPATH") "/bin/oracle"))
+
+(add-hook 'go-mode-hook (lambda ()
+                          (local-set-key (kbd "M-.") #'godef-jump)))
+
+(add-hook 'go-mode-hook 'go-eldoc-setup)

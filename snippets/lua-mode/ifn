@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key: ifn
+# name: ifn
+# --
+if not $1 then
+  $0
+end

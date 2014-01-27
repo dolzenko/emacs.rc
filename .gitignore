@@ -12,3 +12,6 @@ projectile-bookmarks.eld
 tramp
 var/pcache/gh/gh-gist-api/dolzenko
 *.elc
+.mc-lists.el
+ac-comphist.dat
+session*

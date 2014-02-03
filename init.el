@@ -789,6 +789,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
             ("ml" . "ocaml")
             ("vbs" . "cscript")
             ("go" . "go run")
+            ("html" . "")
             )
           )
          (fName (buffer-file-name))
@@ -800,16 +801,16 @@ If the file is emacs lisp, run the byte compiled version if exist."
     (when (buffer-modified-p)
       (when (y-or-n-p "Buffer modified. Do you want to save first?")
           (save-buffer) ) )
+    (cond
+     ((string-equal fSuffix "el") (load (file-name-sans-extension fName)))
+     ((string-equal fSuffix "html") (browse-url fName))
+     (progName (progn
+                   (message "Running %s" cmdStr)
+                   (shell-command cmdStr "*run-current-file output*" )
+                   (message "%s finished" cmdStr)))
+     (t "No recognized program file suffix for this file."))
 
-    (if (string-equal fSuffix "el") ; special case for emacs lisp
-        (load (file-name-sans-extension fName))
-      (if progName
-          (progn
-            (message "Running…")
-            (shell-command cmdStr "*run-current-file output*" )
-            )
-        (message "No recognized program file suffix for this file.")
-        ) ) ))
+     ))
 
 ;; Turn off mini window autoresize so that output appear in the separate buffer
 ;; even if short (and not discarded immediately)
@@ -1234,3 +1235,11 @@ If the file is emacs lisp, run the byte compiled version if exist."
    (t "_test")))
 
 (require 'git-link)
+
+(global-visual-line-mode)
+(when (fboundp 'adaptive-wrap-prefix-mode)
+  (defun my-activate-adaptive-wrap-prefix-mode ()
+    "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
+    (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
+  (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
+(setq visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))

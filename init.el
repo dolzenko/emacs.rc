@@ -1243,3 +1243,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
     (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
   (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
 (setq visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
+(setq adaptive-wrap-extra-indent 2)
+
+(require 'rcodetools)
+(require 'bundler)

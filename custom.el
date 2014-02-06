@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(adaptive-wrap-extra-indent 2)
  '(blink-cursor-mode nil)
  '(bmkp-last-as-first-bookmark-file "c:\\Users\\evgeniy\\AppData\\Roaming\\.emacs.bmk")
  '(enh-ruby-bounce-deep-indent 1)
@@ -18,7 +19,16 @@
  '(rspec-use-opts-file-when-available nil)
  '(rspec-use-rake-flag t)
  '(rspec-use-rake-when-possible nil)
- '(safe-local-variable-values (quote ((require-final-newline) (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby") (folded-file . t) (encoding . utf-8))))
+ '(safe-local-variable-values
+   (quote
+    ((require-final-newline)
+     (ruby-compilation-executable . "ruby")
+     (ruby-compilation-executable . "ruby1.8")
+     (ruby-compilation-executable . "ruby1.9")
+     (ruby-compilation-executable . "rbx")
+     (ruby-compilation-executable . "jruby")
+     (folded-file . t)
+     (encoding . utf-8))))
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)
  '(smtpmail-smtp-server "smtp.googlemail.com")

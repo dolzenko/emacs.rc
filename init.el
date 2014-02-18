@@ -320,10 +320,6 @@
 ;; indicate the current state of case-fold-search in your ModeLine
 (add-to-list 'minor-mode-alist '(case-fold-search " case-fold"))
 
-;; turn off vc-git
-;; (eval-after-load "vc" '(remove-hook 'find-file-hooks 'vc-find-file-hook))
-(setq vc-handled-backends ())
-
 ;; classic
 (defun google ()
   "Googles a query or region if any."
@@ -1247,3 +1243,8 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (require 'rcodetools)
 (require 'bundler)
+
+(when window-system (global-unset-key "\C-z"))
+
+(setq-default fill-column 80)
+(require 'flymake-cursor)

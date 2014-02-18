@@ -6,6 +6,7 @@
  '(adaptive-wrap-extra-indent 2)
  '(blink-cursor-mode nil)
  '(bmkp-last-as-first-bookmark-file "c:\\Users\\evgeniy\\AppData\\Roaming\\.emacs.bmk")
+ '(css-indent-offset 2)
  '(enh-ruby-bounce-deep-indent 1)
  '(fill-column 120)
  '(global-auto-mark-mode t)

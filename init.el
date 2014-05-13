@@ -254,9 +254,9 @@
 (defun javascript-custom-setup () (moz-minor-mode 1))
 
 ;; Keep history of recently opened filse
-(require 'recentf) (recentf-mode 1)
-(setq recentf-max-saved-items 500)
-(setq recentf-max-menu-items 60)
+;; (require 'recentf) (recentf-mode 1)
+;; (setq recentf-max-saved-items 500)
+;; (setq recentf-max-menu-items 60)
 
 ;; ;; Beter unique buffer names
 (require 'uniquify)
@@ -898,9 +898,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (setq reb-re-syntax 'string)
 
 (global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x C-g") 'magit-status)
 (global-set-key (kbd "C-x C-a") 'ack-and-a-half)
-(global-set-key (kbd "C-x c") 'recompile)
 
 (setq enable-recursive-minibuffers t)
 (minibuffer-depth-indicate-mode 99)
@@ -1070,7 +1068,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (add-hook 'js-mode-hook 'flymake-jslint-load)
 
 ;; make whitespace-mode use just basic coloring
-(setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+;; (setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
 
 ;; Zsh in Shell mode - prevent truncated echoed commands from being printed
 (defun my-comint-init ()
@@ -1086,7 +1084,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 ;; "Standard selection" - replace the region just by typing , and kill the selected just with Backspace key
 (delete-selection-mode 1)
 
-(setq ansi-color-names-vector ["black" "red4" "green4" "yellow4" "blue3" "magenta4" "black" "white"])
+(setq ansi-color-names-vector ["black" "red4" "green4" "yellow4" "blue3" "magenta4" "black" "navy"])
 (setq ansi-color-map (ansi-color-make-color-map))
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -1208,6 +1206,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 
 ;; Go
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (add-to-list 'load-path (concat (getenv "GOPATH") "/src/github.com/golang/lint/misc/emacs"))
@@ -1232,19 +1231,37 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (require 'git-link)
 
-(global-visual-line-mode)
-(when (fboundp 'adaptive-wrap-prefix-mode)
-  (defun my-activate-adaptive-wrap-prefix-mode ()
-    "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
-    (adaptive-wrap-prefix-mode (if visual-line-mode 1 -1)))
-  (add-hook 'visual-line-mode-hook 'my-activate-adaptive-wrap-prefix-mode))
-(setq visual-line-fringe-indicators (quote (left-curly-arrow right-curly-arrow)))
-(setq adaptive-wrap-extra-indent 2)
-
 (require 'rcodetools)
 (require 'bundler)
 
 (when window-system (global-unset-key "\C-z"))
 
-(setq-default fill-column 80)
+(setq-default fill-column 100)
 (require 'flymake-cursor)
+
+;; ;; Highlight long lines
+;; (require 'whitespace)
+;; (global-whitespace-mode t)
+;; (setq whitespace-line-column 100)
+;; (setq whitespace-style '(face lines-tail))
+
+(require 'dired-subtree)
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
+            ))
+
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
+;; (ac-config-default)
+
+;; http://stackoverflow.com/questions/3072648/cucumbers-ansi-colors-messing-up-emacs-compilation-buffer
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(global-set-key (kbd "C-c r") 'recompile)
+(setq compilation-ask-about-save nil)

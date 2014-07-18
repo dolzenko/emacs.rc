@@ -1051,10 +1051,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
   (interactive)
   (other-window -1))
 
-(global-set-key (kbd "C-8") 'move-cursor-next-pane)
-(global-set-key (kbd "C-7") 'move-cursor-previous-pane)
-(global-set-key (kbd "C-9") 'win-swap)
-
 ;; Ctrl+x r w/j to remember/switch layout to/from register
 
 
@@ -1123,8 +1119,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key "\M-S" 'save-buffer)
 (global-set-key "\M-B" 'ido-switch-buffer)
 
-(global-set-key "\M-P" 'previous-buffer)
-(global-set-key "\M-N" 'next-buffer)
 (global-set-key "\M-R" 'rspec-verify)
 
 (global-set-key "\M-'" 'insert-single-quotes)
@@ -1236,7 +1230,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (when window-system (global-unset-key "\C-z"))
 
-(setq-default fill-column 100)
+(setq-default fill-column 80)
 (require 'flymake-cursor)
 
 ;; ;; Highlight long lines

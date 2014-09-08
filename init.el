@@ -710,8 +710,10 @@
 
 ;; (require 'rvm)
 ;; (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
+(ignore-errors
 (global-rbenv-mode)
 (setq rbenv-show-active-ruby-in-modeline nil)
+)
 
 (defun clear-shell ()
   (interactive)
@@ -903,7 +905,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (setq enable-recursive-minibuffers t)
 (minibuffer-depth-indicate-mode 99)
 
-(load "~/.emacs.private")
+(ignore-errors (load "~/.emacs.private"))
 
 
 (setq gnus-select-method '(nnimap "gmail"
@@ -1209,9 +1211,11 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (add-to-list 'load-path (concat (getenv "GOPATH") "/src/github.com/golang/lint/misc/emacs"))
-(require 'golint)
+(ignore-errors (require 'golint))
 
+(ignore-errors
 (load (concat (getenv "GOPATH") "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el"))
+)
 (setq go-oracle-command (concat (getenv "GOPATH") "/bin/oracle"))
 
 (add-hook 'go-mode-hook (lambda ()
@@ -1236,7 +1240,9 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (when window-system (global-unset-key "\C-z"))
 
 (setq-default fill-column 80)
+(ignore-errors
 (require 'flymake-cursor)
+)
 
 ;; ;; Highlight long lines
 ;; (require 'whitespace)
@@ -1244,11 +1250,13 @@ If the file is emacs lisp, run the byte compiled version if exist."
 ;; (setq whitespace-line-column 100)
 ;; (setq whitespace-style '(face lines-tail))
 
+(ignore-errors
 (require 'dired-subtree)
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
             ))
+)
 
 ;; (require 'auto-complete-config)
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
@@ -1265,5 +1273,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key (kbd "C-c r") 'recompile)
 (setq compilation-ask-about-save nil)
 
+(ignore-errors
 (require 'discover)
 (global-discover-mode 1)
+)

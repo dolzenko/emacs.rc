@@ -1114,7 +1114,12 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (global-set-key "\M-l" 'kill-this-buffer)
 (global-set-key "\M-K" 'kill-this-buffer)
-(global-set-key "\M-O" 'other-window)
+(defun frame-bck()
+  (interactive)
+  (other-window -1)
+  )
+(define-key (current-global-map) (kbd "M-o") 'other-window)
+(define-key (current-global-map) (kbd "M-O") 'frame-bck)
 (global-set-key "\M-F" 'ido-find-file)
 (global-set-key "\M-S" 'save-buffer)
 (global-set-key "\M-B" 'ido-switch-buffer)
@@ -1259,3 +1264,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (global-set-key (kbd "C-c r") 'recompile)
 (setq compilation-ask-about-save nil)
+
+(require 'discover)
+(global-discover-mode 1)

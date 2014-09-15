@@ -173,8 +173,7 @@
 
 ;; Files are reloaded automatically when changed
 (global-auto-revert-mode t)
-
-
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 ;; Add ruby file types
 (progn
@@ -216,9 +215,9 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-(require 'dired-x)
-(setq-default dired-omit-files-p t) ;; this is buffer-local variable
-(setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+;; (require 'dired-x)
+;; (setq-default dired-omit-files-p t) ;; this is buffer-local variable
+;; (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 (setq dired-listing-switches "-lXGh --group-directories-first") ;; C-u s while in a Dired buffer will prompt you for new `ls` switches
 
 ;; Jabber
@@ -609,7 +608,7 @@
 
 
 ;; ;; TODO doesn't work and breaks tab switching intermittently
-;; ;; (require 'tty-format)
+;; (require 'tty-format)
 ;; ;; (add-hook 'find-file-hooks 'tty-format-guess)
 
 ;; ;; it's crazy
@@ -805,9 +804,16 @@ If the file is emacs lisp, run the byte compiled version if exist."
      (progName (progn
                    (message "Running %s" cmdStr)
                    (shell-command cmdStr "*run-current-file output*" )
-                   (message "%s finished" cmdStr)))
+                   (message "%s finished" cmdStr)
+                   (if (eq (list-length (window-list nil 0)) 1)
+                       (switch-to-buffer "*run-current-file output*")
+                     )
+                   ;; (if (eq (list-length (window-list nil 0)) 2)
+                   ;;     (progn (other-window 1)
+                   ;;            (set-window-buffer (next-window) "*run-current-file output*"))
+                   ;;   )
+                   ))
      (t "No recognized program file suffix for this file."))
-
      ))
 
 ;; Turn off mini window autoresize so that output appear in the separate buffer
@@ -1054,11 +1060,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
   (other-window -1))
 
 ;; Ctrl+x r w/j to remember/switch layout to/from register
-
-
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-
-
 (add-hook 'ruby-mode-hook 'yard-mode)
 (add-hook 'ruby-mode-hook 'eldoc-mode)
 
@@ -1131,7 +1132,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key "\M-'" 'insert-single-quotes)
 (global-set-key "\M-\"" 'insert-double-quotes)
 
-(global-set-key "\M-G" 'projectile-find-file)
+(global-set-key (kbd "C-c f") 'projectile-find-file)
 
 (defun insert-single-quotes (&optional arg)
   "Enclose following ARG sexps in quotation marks. Leave point after open-paren."
@@ -1277,3 +1278,15 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (require 'discover)
 (global-discover-mode 1)
 )
+
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-c" "C-x"))
+(setq guide-key/recursive-key-sequence-flag t)
+(setq guide-key/idle-delay 0.8)
+(setq guide-key/popup-window-position 'bottom)
+(guide-key-mode 1) ; Enable guide-key-mode
+
+(load "comint-kill-output-to-kill-ring")
+(add-hook 'comint-mode-hook
+  (lambda()
+   (define-key comint-mode-map [(control c) (control o)] 'comint-kill-output-to-kill-ring)))

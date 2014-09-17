@@ -218,7 +218,7 @@
 ;; (require 'dired-x)
 ;; (setq-default dired-omit-files-p t) ;; this is buffer-local variable
 ;; (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
-(setq dired-listing-switches "-lXGh --group-directories-first") ;; C-u s while in a Dired buffer will prompt you for new `ls` switches
+(setq dired-listing-switches "-lXGhA --group-directories-first") ;; C-u s while in a Dired buffer will prompt you for new `ls` switches
 
 ;; Jabber
 (add-to-list 'load-path (concat user-emacs-directory "misc/emacs-jabber-0.8.91"))
@@ -805,13 +805,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
                    (message "Running %s" cmdStr)
                    (shell-command cmdStr "*run-current-file output*" )
                    (message "%s finished" cmdStr)
-                   (if (eq (list-length (window-list nil 0)) 1)
-                       (switch-to-buffer "*run-current-file output*")
-                     )
-                   ;; (if (eq (list-length (window-list nil 0)) 2)
-                   ;;     (progn (other-window 1)
-                   ;;            (set-window-buffer (next-window) "*run-current-file output*"))
-                   ;;   )
+                   (pop-to-buffer "*run-current-file output*")
                    ))
      (t "No recognized program file suffix for this file."))
      ))
@@ -1036,7 +1030,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 ;; 'Visual' window switching (meh)
 (require 'switch-window)
-(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; Remember/switch window layouts with C-c left/right
 (winner-mode 1)
@@ -1045,9 +1038,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key [M-right] 'windmove-right) ; move to right window
 (global-set-key [M-up]    'windmove-up)    ; move to upper window
 (global-set-key [M-down]  'windmove-down)  ; move to downer window
-
-;; So that C-x C-o works the same as C-x o
-(global-set-key (kbd "C-x C-o") 'other-window)
 
 (defun move-cursor-next-pane ()
   "Move cursor to the next pane."
@@ -1290,3 +1280,11 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (add-hook 'comint-mode-hook
   (lambda()
    (define-key comint-mode-map [(control c) (control o)] 'comint-kill-output-to-kill-ring)))
+
+;; Unbind C-x o and use M-o exclusively
+(define-key ctl-x-map "o" 'other-window)
+
+(global-set-key (kbd "C-c k") 'browse-kill-ring)
+
+;; Complete snippets with ido
+(setq yas-prompt-functions '(yas-ido-prompt))

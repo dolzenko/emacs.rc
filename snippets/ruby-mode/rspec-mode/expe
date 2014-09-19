@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: expect(...).to eq(...)
+# --
+expect($1).to eq($0)

@@ -1288,3 +1288,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 ;; Complete snippets with ido
 (setq yas-prompt-functions '(yas-ido-prompt))
+
+;; Unbind conflicting dired-omit-mode binding from dired-x.el
+(define-key dired-mode-map "\M-o" nil)

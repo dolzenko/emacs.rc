@@ -1,4 +1,4 @@
 #name : each { |...| ... }
 # key: ea
 # --
-each { |${e}| $0 }
+each {|${e}| $0 }

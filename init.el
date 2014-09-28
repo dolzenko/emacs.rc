@@ -78,7 +78,7 @@
 
 ;; Focus buffers list on C-x C-b (no idea why this is not default)
 (defun list-buffers-and-other-window () (interactive) (call-interactively 'list-buffers) (call-interactively 'other-window))
-(global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
+;; (global-set-key (kbd "C-x C-b") 'ido-switch-buffer)
 
 ;; Quick buffer kill
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
@@ -86,7 +86,7 @@
 (global-set-key (kbd "C-c b") 'bury-buffer)
 
 ;; Juicy fingers make me press C-x f instead of C-x C-f
-(global-set-key (kbd "C-x f") 'ido-find-file)
+;; (global-set-key (kbd "C-x f") 'ido-find-file)
 
 ;; C-a goes to the first non space symbol first
 (defun back-to-indentation-or-beginning ()
@@ -128,24 +128,24 @@
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
 
 
-;; IDO
-(ido-mode t)
-(ido-ubiquitous t)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 7
-      ido-max-directory-size 100000
-      ido-max-work-file-list 50)
+;; ;; IDO
+;; (ido-mode t)
+;; (ido-ubiquitous t)
+;; (setq ido-enable-prefix nil
+;;       ido-enable-flex-matching t
+;;       ido-auto-merge-work-directories-length nil
+;;       ido-create-new-buffer 'always
+;;       ido-use-filename-at-point 'guess
+;;       ido-use-virtual-buffers t
+;;       ido-handle-duplicate-virtual-buffers 2
+;;       ido-max-prospects 7
+;;       ido-max-directory-size 100000
+;;       ido-max-work-file-list 50)
 
-;; IDO for commands
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
+;; ;; IDO for commands
+;; (require 'smex)
+;; (smex-initialize)
+;; (global-set-key (kbd "M-x") 'smex)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -253,7 +253,8 @@
 (defun javascript-custom-setup () (moz-minor-mode 1))
 
 ;; Keep history of recently opened filse
-;; (require 'recentf) (recentf-mode 1)
+(require 'recentf)
+(recentf-mode 1)
 ;; (setq recentf-max-saved-items 500)
 ;; (setq recentf-max-menu-items 60)
 
@@ -622,7 +623,7 @@
 
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
-(put 'ido-exit-minibuffer 'disabled nil)
+;; (put 'ido-exit-minibuffer 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -1139,9 +1140,9 @@ If the file is emacs lisp, run the byte compiled version if exist."
 ;;    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([1 67108896 5 3 18] 0 "%d")) arg)))
 
 (projectile-global-mode)
-(flx-ido-mode 1)
+;; (flx-ido-mode 1)
 ;; disable ido faces to see flx highlights.
-(setq ido-use-faces nil)
+;; (setq ido-use-faces nil)
 
 (require 'align)
 ;; Make M-x align know what to do
@@ -1278,9 +1279,11 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key (kbd "C-c k") 'browse-kill-ring)
 
 ;; Complete snippets with ido
-(setq yas-prompt-functions '(yas-ido-prompt))
+;; (setq yas-prompt-functions '(yas-ido-prompt))
 
 ;; Unbind conflicting dired-omit-mode binding from dired-x.el
 (defun my-dired-hook ()
   (define-key dired-mode-map "\M-o" nil))
 (add-hook 'dired-mode-hook 'my-dired-hook)
+
+(load "helm.el")

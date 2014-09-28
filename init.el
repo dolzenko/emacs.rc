@@ -1113,15 +1113,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
   )
 (define-key (current-global-map) (kbd "M-o") 'other-window)
 (define-key (current-global-map) (kbd "M-O") 'frame-bck)
-(global-set-key "\M-F" 'ido-find-file)
-(global-set-key "\M-S" 'save-buffer)
-(global-set-key "\M-B" 'ido-switch-buffer)
-
-(global-set-key "\M-R" 'rspec-verify)
-
-(global-set-key "\M-'" 'insert-single-quotes)
-(global-set-key "\M-\"" 'insert-double-quotes)
-
 (global-set-key (kbd "C-c f") 'projectile-find-file)
 
 (defun insert-single-quotes (&optional arg)
@@ -1290,4 +1281,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (setq yas-prompt-functions '(yas-ido-prompt))
 
 ;; Unbind conflicting dired-omit-mode binding from dired-x.el
-(define-key dired-mode-map "\M-o" nil)
+(defun my-dired-hook ()
+  (define-key dired-mode-map "\M-o" nil))
+(add-hook 'dired-mode-hook 'my-dired-hook)

@@ -1286,4 +1286,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
   (define-key dired-mode-map "\M-o" nil))
 (add-hook 'dired-mode-hook 'my-dired-hook)
 
-(load "helm.el")
+(load "~/.emacs.d/helm.el")
+
+(setq git-link-open-in-browser t)

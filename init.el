@@ -101,7 +101,7 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 ;; Rinari
 (add-to-list 'load-path "~/emacs.rc/rinari")
@@ -258,9 +258,8 @@
 ;; (setq recentf-max-saved-items 500)
 ;; (setq recentf-max-menu-items 60)
 
-;; ;; Beter unique buffer names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+;; Beter unique buffer names
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 (setq dired-recursive-copies t)
 
@@ -1289,3 +1288,11 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (load "~/.emacs.d/helm.el")
 
 (setq git-link-open-in-browser t)
+
+;; (require 'dirtrack)
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (shell-dirtrack-mode 1)
+            ;; (dirtrack-mode 1)
+            ))
+;; (setq-default dirtrack-list '("^\\(.+?\\) \\$" 1))

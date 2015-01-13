@@ -1,10 +1,10 @@
 ;;; ido-ubiquitous-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "ido-ubiquitous" "ido-ubiquitous.el" (21618
-;;;;;;  4381 916372 347000))
+;;;### (autoloads (ido-ubiquitous-mode) "ido-ubiquitous" "ido-ubiquitous.el"
+;;;;;;  (21684 61804 243707 451000))
 ;;; Generated autoloads from ido-ubiquitous.el
 
 (define-obsolete-variable-alias 'ido-ubiquitous 'ido-ubiquitous-mode "0.8")
@@ -34,9 +34,16 @@ Use `ido-completing-read' instead of `completing-read' almost everywhere.
 
 ;;;***
 
+;;;### (autoloads nil nil ("ido-ubiquitous-pkg.el") (21684 61804
+;;;;;;  257041 668000))
+
+;;;***
+
+(provide 'ido-ubiquitous-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; ido-ubiquitous-autoloads.el ends here

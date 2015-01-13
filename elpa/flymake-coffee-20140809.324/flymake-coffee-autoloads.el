@@ -1,10 +1,10 @@
 ;;; flymake-coffee-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "flymake-coffee" "flymake-coffee.el" (21479
-;;;;;;  22336 720747 906000))
+;;;### (autoloads (flymake-coffee-load) "flymake-coffee" "flymake-coffee.el"
+;;;;;;  (21684 61921 325160 19000))
 ;;; Generated autoloads from flymake-coffee.el
 
 (autoload 'flymake-coffee-load "flymake-coffee" "\
@@ -14,9 +14,16 @@ Configure flymake mode to check the current buffer's coffeescript syntax.
 
 ;;;***
 
+;;;### (autoloads nil nil ("flymake-coffee-pkg.el") (21684 61921
+;;;;;;  340444 371000))
+
+;;;***
+
+(provide 'flymake-coffee-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; flymake-coffee-autoloads.el ends here

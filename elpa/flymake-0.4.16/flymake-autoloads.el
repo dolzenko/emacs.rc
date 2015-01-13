@@ -4,7 +4,8 @@
 
 
 ;;;### (autoloads (flymake-find-file-hook flymake-mode-off flymake-mode-on
-;;;;;;  flymake-mode) "flymake" "flymake.el" (21024 16372))
+;;;;;;  flymake-mode) "flymake" "flymake.el" (21684 61892 636804
+;;;;;;  690000))
 ;;; Generated autoloads from flymake.el
 
 (autoload 'flymake-mode "flymake" "\
@@ -32,7 +33,8 @@ Turn flymake mode off.
 
 ;;;***
 
-;;;### (autoloads nil nil ("flymake-pkg.el") (21024 16372 664266))
+;;;### (autoloads nil nil ("flymake-pkg.el") (21684 61892 659167
+;;;;;;  284000))
 
 ;;;***
 

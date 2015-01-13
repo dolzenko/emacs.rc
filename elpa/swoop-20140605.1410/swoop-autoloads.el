@@ -1,9 +1,11 @@
 ;;; swoop-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "swoop" "swoop.el" (21409 41927 872180 274000))
+;;;### (autoloads (swoop-from-evil-search swoop-function swoop-from-isearch
+;;;;;;  swoop-line-length-over80 swoop-migemo swoop-pcre-regexp swoop-multi
+;;;;;;  swoop) "swoop" "swoop.el" (21684 61857 604370 280000))
 ;;; Generated autoloads from swoop.el
 
 (autoload 'swoop "swoop" "\
@@ -51,13 +53,15 @@ During evil-search, switch over to swoop.
 ;;;***
 
 ;;;### (autoloads nil nil ("swoop-edit.el" "swoop-lib.el" "swoop-pkg.el")
-;;;;;;  (21409 41927 894708 11000))
+;;;;;;  (21684 61857 633049 147000))
 
 ;;;***
 
+(provide 'swoop-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; swoop-autoloads.el ends here

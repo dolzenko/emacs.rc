@@ -1,10 +1,10 @@
 ;;; less-css-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "less-css-mode" "less-css-mode.el" (21543 51585
-;;;;;;  661407 967000))
+;;;### (autoloads (less-css-mode less-css-compile) "less-css-mode"
+;;;;;;  "less-css-mode.el" (21684 61907 164984 678000))
 ;;; Generated autoloads from less-css-mode.el
 
 (autoload 'less-css-compile "less-css-mode" "\
@@ -23,9 +23,16 @@ Special commands:
 
 ;;;***
 
+;;;### (autoloads nil nil ("less-css-mode-pkg.el") (21684 61907 188051
+;;;;;;  410000))
+
+;;;***
+
+(provide 'less-css-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; less-css-mode-autoloads.el ends here

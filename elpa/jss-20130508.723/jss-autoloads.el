@@ -1,10 +1,10 @@
 ;;; jss-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "jss-browser" "jss-browser.el" (21190 36111
-;;;;;;  551306 434000))
+;;;### (autoloads (jss-connect) "jss-browser" "jss-browser.el" (21684
+;;;;;;  61880 832658 379000))
 ;;; Generated autoloads from jss-browser.el
 
 (autoload 'jss-connect "jss-browser" "\
@@ -15,8 +15,8 @@ jump to its browser buffer.
 
 ;;;***
 
-;;;### (autoloads nil "jss-http-repl" "jss-http-repl.el" (21190 36111
-;;;;;;  507306 433000))
+;;;### (autoloads (jss-http-repl jss-http-repl-mode) "jss-http-repl"
+;;;;;;  "jss-http-repl.el" (21684 61880 844658 528000))
 ;;; Generated autoloads from jss-http-repl.el
 
 (autoload 'jss-http-repl-mode "jss-http-repl" "\
@@ -91,14 +91,16 @@ but it can be used with any kind of HTTP request.
 ;;;;;;  "jss-browser-webkit.el" "jss-console.el" "jss-debugger.el"
 ;;;;;;  "jss-deferred.el" "jss-io-pretty-printers.el" "jss-io.el"
 ;;;;;;  "jss-pkg.el" "jss-prompt.el" "jss-remote-value.el" "jss-script.el"
-;;;;;;  "jss-super-mode.el" "jss-utils.el" "jss.el") (21190 36111
-;;;;;;  587100 490000))
+;;;;;;  "jss-super-mode.el" "jss-utils.el" "jss.el") (21684 61880
+;;;;;;  942145 34000))
 
 ;;;***
 
+(provide 'jss-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; jss-autoloads.el ends here

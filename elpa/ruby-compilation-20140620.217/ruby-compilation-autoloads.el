@@ -1,10 +1,13 @@
 ;;; ruby-compilation-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "ruby-compilation" "ruby-compilation.el" (21463
-;;;;;;  22704 372108 793000))
+;;;### (autoloads (ruby-compilation-this-test ruby-compilation-cap
+;;;;;;  pcomplete/cap ruby-compilation-rake ruby-compilation-rake-refresh-tasks
+;;;;;;  pcomplete/rake ruby-compilation-this-buffer ruby-compilation-run)
+;;;;;;  "ruby-compilation" "ruby-compilation.el" (21684 61646 717741
+;;;;;;  203000))
 ;;; Generated autoloads from ruby-compilation.el
 
 (eval-after-load 'ruby-mode '(progn (define-key ruby-mode-map (kbd "C-x t") 'ruby-compilation-this-buffer) (define-key ruby-mode-map (kbd "C-x T") 'ruby-compilation-this-test)))
@@ -69,9 +72,16 @@ Run the test at point through Ruby compilation.
 
 ;;;***
 
+;;;### (autoloads nil nil ("ruby-compilation-pkg.el") (21684 61646
+;;;;;;  740033 838000))
+
+;;;***
+
+(provide 'ruby-compilation-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; ruby-compilation-autoloads.el ends here

@@ -1,10 +1,11 @@
 ;;; find-things-fast-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "find-things-fast" "find-things-fast.el" (21543
-;;;;;;  51594 533407 847000))
+;;;### (autoloads (ftf-gdb ftf-compile ftf-find-file ftf-grepsource
+;;;;;;  ftf-add-filetypes) "find-things-fast" "find-things-fast.el"
+;;;;;;  (21684 61803 107693 324000))
 ;;; Generated autoloads from find-things-fast.el
 
 (defvar ftf-filetypes '("*.h" "*.hpp" "*.cpp" "*.c" "*.cc" "*.cpp" "*.inl" "*.grd" "*.idl" "*.m" "*.mm" "*.py" "*.sh" "*.cfg" "*SConscript" "SConscript*" "*.scons" "*.vcproj" "*.vsprops" "*.make" "*.gyp" "*.gypi") "\
@@ -53,9 +54,16 @@ Run the `gdb' function from the project root.
 
 ;;;***
 
+;;;### (autoloads nil nil ("find-things-fast-pkg.el") (21684 61803
+;;;;;;  126214 10000))
+
+;;;***
+
+(provide 'find-things-fast-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; find-things-fast-autoloads.el ends here

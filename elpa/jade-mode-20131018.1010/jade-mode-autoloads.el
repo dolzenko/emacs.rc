@@ -1,10 +1,10 @@
 ;;; jade-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "jade-mode" "jade-mode.el" (21591 43428 908767
-;;;;;;  783000))
+;;;### (autoloads (jade-mode) "jade-mode" "jade-mode.el" (21684 61906
+;;;;;;  8970 360000))
 ;;; Generated autoloads from jade-mode.el
 
 (autoload 'jade-mode "jade-mode" "\
@@ -16,9 +16,16 @@ Major mode for editing jade node.js templates
 
 ;;;***
 
+;;;### (autoloads nil nil ("jade-mode-pkg.el") (21684 61906 24816
+;;;;;;  540000))
+
+;;;***
+
+(provide 'jade-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; jade-mode-autoloads.el ends here

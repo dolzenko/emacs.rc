@@ -1,10 +1,14 @@
 ;;; pcre2el-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "pcre2el" "pcre2el.el" (21463 22708 108108
-;;;;;;  695000))
+;;;### (autoloads (rxt-global-mode turn-on-rxt-mode rxt-mode rxt-convert-to-strings
+;;;;;;  rxt-convert-to-rx rxt-convert-syntax rxt-explain rxt-explain-pcre
+;;;;;;  rxt-explain-elisp rxt-pcre-to-strings rxt-pcre-to-sre rxt-pcre-to-rx
+;;;;;;  rxt-pcre-to-elisp rxt-toggle-elisp-rx rxt-elisp-to-strings
+;;;;;;  rxt-elisp-to-sre rxt-elisp-to-rx rxt-elisp-to-pcre pcre-query-replace-regexp
+;;;;;;  pcre-mode) "pcre2el" "pcre2el.el" (21684 61856 696359 12000))
 ;;; Generated autoloads from pcre2el.el
 
 (defvar pcre-mode nil "\
@@ -223,9 +227,16 @@ See `rxt-mode' for more information on Rxt mode.
 
 ;;;***
 
+;;;### (autoloads nil nil ("pcre2el-pkg.el") (21684 61856 718844
+;;;;;;  205000))
+
+;;;***
+
+(provide 'pcre2el-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; pcre2el-autoloads.el ends here

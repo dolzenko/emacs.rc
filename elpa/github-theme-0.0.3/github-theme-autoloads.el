@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads nil nil ("github-theme-pkg.el" "github-theme.el")
-;;;;;;  (20595 22968 339433))
+;;;;;;  (21684 61888 802523 369000))
 
 ;;;***
 

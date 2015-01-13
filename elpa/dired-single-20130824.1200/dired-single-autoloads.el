@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (dired-single-toggle-buffer-name dired-single-magic-buffer
 ;;;;;;  dired-single-buffer-mouse dired-single-buffer) "dired-single"
-;;;;;;  "dired-single.el" (21120 39031 828502 32000))
+;;;;;;  "dired-single.el" (21684 61883 696693 883000))
 ;;; Generated autoloads from dired-single.el
 
 (autoload 'dired-single-buffer "dired-single" "\
@@ -58,8 +58,8 @@ Will also seek to uniquify the 'real' buffer name.
 
 ;;;***
 
-;;;### (autoloads nil nil ("dired-single-pkg.el") (21120 39031 841591
-;;;;;;  510000))
+;;;### (autoloads nil nil ("dired-single-pkg.el") (21684 61883 715079
+;;;;;;  379000))
 
 ;;;***
 

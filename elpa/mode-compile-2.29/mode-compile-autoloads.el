@@ -12,7 +12,7 @@
 ;;;;;;  mode-compile-ignore-makerule-regexp mode-compile-prefered-default-makerule
 ;;;;;;  mode-compile-make-options mode-compile-ignore-makefile-backups
 ;;;;;;  mode-compile-make-program) "mode-compile" "mode-compile.el"
-;;;;;;  (20349 34725))
+;;;;;;  (21684 61884 188699 983000))
 ;;; Generated autoloads from mode-compile.el
 
 (defvar mode-compile-make-program "make" "\
@@ -262,7 +262,8 @@ Bound on \\[mode-compile-kill].
 
 ;;;***
 
-;;;### (autoloads nil nil ("mode-compile-pkg.el") (20349 34725 896000))
+;;;### (autoloads nil nil ("mode-compile-pkg.el") (21684 61884 205474
+;;;;;;  774000))
 
 ;;;***
 

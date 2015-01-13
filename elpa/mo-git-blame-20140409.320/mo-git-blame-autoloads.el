@@ -1,10 +1,11 @@
 ;;; mo-git-blame-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "mo-git-blame" "mo-git-blame.el" (21326 16348
-;;;;;;  577297 544000))
+;;;### (autoloads (mo-git-blame-current-for-revision mo-git-blame-current
+;;;;;;  mo-git-blame-file) "mo-git-blame" "mo-git-blame.el" (21684
+;;;;;;  61856 36350 823000))
 ;;; Generated autoloads from mo-git-blame.el
 
 (autoload 'mo-git-blame-file "mo-git-blame" "\
@@ -38,9 +39,16 @@ Calls `mo-git-blame-file' for `revision' for the current buffer.
 
 ;;;***
 
+;;;### (autoloads nil nil ("mo-git-blame-pkg.el") (21684 61856 54033
+;;;;;;  508000))
+
+;;;***
+
+(provide 'mo-git-blame-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; mo-git-blame-autoloads.el ends here

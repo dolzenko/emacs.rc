@@ -1,10 +1,10 @@
 ;;; slim-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "slim-mode" "slim-mode.el" (21409 41848 8182
-;;;;;;  365000))
+;;;### (autoloads (slim-mode) "slim-mode" "slim-mode.el" (21684 61787
+;;;;;;  503499 203000))
 ;;; Generated autoloads from slim-mode.el
 
 (autoload 'slim-mode "slim-mode" "\
@@ -18,9 +18,16 @@ Major mode for editing Slim files.
 
 ;;;***
 
+;;;### (autoloads nil nil ("slim-mode-pkg.el") (21684 61787 521667
+;;;;;;  302000))
+
+;;;***
+
+(provide 'slim-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; slim-mode-autoloads.el ends here

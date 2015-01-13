@@ -1,9 +1,10 @@
 ;;; yari-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "yari" "yari.el" (21373 60019 207852 138000))
+;;;### (autoloads (yari yari-helm yari-anything) "yari" "yari.el"
+;;;;;;  (21684 61873 972573 317000))
 ;;; Generated autoloads from yari.el
 
 (autoload 'yari-anything "yari" "\
@@ -23,9 +24,15 @@ Look up Ruby documentation.
 
 ;;;***
 
+;;;### (autoloads nil nil ("yari-pkg.el") (21684 61873 991899 740000))
+
+;;;***
+
+(provide 'yari-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; yari-autoloads.el ends here

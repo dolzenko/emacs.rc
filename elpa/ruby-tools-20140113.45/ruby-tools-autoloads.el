@@ -1,10 +1,10 @@
 ;;; ruby-tools-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "ruby-tools" "ruby-tools.el" (21207 46841 841972
-;;;;;;  688000))
+;;;### (autoloads (ruby-tools-mode) "ruby-tools" "ruby-tools.el"
+;;;;;;  (21684 61801 427672 429000))
 ;;; Generated autoloads from ruby-tools.el
 
 (autoload 'ruby-tools-mode "ruby-tools" "\
@@ -14,14 +14,16 @@ Collection of handy functions for ruby-mode.
 
 ;;;***
 
-;;;### (autoloads nil nil ("ruby-tools-pkg.el") (21207 46841 861445
-;;;;;;  679000))
+;;;### (autoloads nil nil ("ruby-tools-pkg.el") (21684 61801 438323
+;;;;;;  355000))
 
 ;;;***
 
+(provide 'ruby-tools-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; ruby-tools-autoloads.el ends here

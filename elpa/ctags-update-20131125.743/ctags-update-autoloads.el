@@ -4,8 +4,8 @@
 
 
 ;;;### (autoloads (turn-on-ctags-auto-update-mode ctags-auto-update-mode
-;;;;;;  ctags-update) "ctags-update" "ctags-update.el" (21163 10478
-;;;;;;  554025 272000))
+;;;;;;  ctags-update) "ctags-update" "ctags-update.el" (21684 61805
+;;;;;;  51717 497000))
 ;;; Generated autoloads from ctags-update.el
 
 (autoload 'ctags-update "ctags-update" "\
@@ -29,8 +29,8 @@ turn on `ctags-auto-update-mode'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("ctags-update-pkg.el") (21163 10478 573321
-;;;;;;  769000))
+;;;### (autoloads nil nil ("ctags-update-pkg.el") (21684 61805 67578
+;;;;;;  592000))
 
 ;;;***
 

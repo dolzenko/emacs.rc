@@ -1,10 +1,10 @@
 ;;; tabulated-list-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "tabulated-list" "tabulated-list.el" (21463
-;;;;;;  22731 272108 89000))
+;;;### (autoloads (tabulated-list-mode) "tabulated-list" "tabulated-list.el"
+;;;;;;  (21684 61920 909154 870000))
 ;;; Generated autoloads from tabulated-list.el
 
 (autoload 'tabulated-list-mode "tabulated-list" "\
@@ -46,9 +46,16 @@ as the ewoc pretty-printer.
 
 ;;;***
 
+;;;### (autoloads nil nil ("tabulated-list-pkg.el") (21684 61920
+;;;;;;  923757 720000))
+
+;;;***
+
+(provide 'tabulated-list-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; tabulated-list-autoloads.el ends here

@@ -1,10 +1,10 @@
 ;;; unbound-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "unbound" "unbound.el" (21282 55154 644024
-;;;;;;  72000))
+;;;### (autoloads (describe-unbound-keys) "unbound" "unbound.el"
+;;;;;;  (21684 61878 780632 938000))
 ;;; Generated autoloads from unbound.el
 
 (autoload 'describe-unbound-keys "unbound" "\
@@ -15,9 +15,16 @@ Keys are sorted by their complexity; `key-complexity' determines it.
 
 ;;;***
 
+;;;### (autoloads nil nil ("unbound-pkg.el") (21684 61878 800120
+;;;;;;  629000))
+
+;;;***
+
+(provide 'unbound-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; unbound-autoloads.el ends here

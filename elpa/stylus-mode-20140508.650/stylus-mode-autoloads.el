@@ -1,10 +1,10 @@
 ;;; stylus-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "stylus-mode" "stylus-mode.el" (21591 42700
-;;;;;;  124777 636000))
+;;;### (autoloads (stylus-mode) "stylus-mode" "stylus-mode.el" (21684
+;;;;;;  61889 24759 925000))
 ;;; Generated autoloads from stylus-mode.el
 
 (autoload 'stylus-mode "stylus-mode" "\
@@ -16,9 +16,16 @@ Major mode for editing stylus node.js templates
 
 ;;;***
 
+;;;### (autoloads nil nil ("stylus-mode-pkg.el") (21684 61889 46273
+;;;;;;  984000))
+
+;;;***
+
+(provide 'stylus-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; stylus-mode-autoloads.el ends here

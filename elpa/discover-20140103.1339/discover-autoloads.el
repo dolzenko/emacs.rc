@@ -1,10 +1,11 @@
 ;;; discover-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "discover" "discover.el" (21517 37761 123008
-;;;;;;  730000))
+;;;### (autoloads (global-discover-mode discover-mode discover-add-context-menu
+;;;;;;  discover-get-context-symbol discover-show-context-menu) "discover"
+;;;;;;  "discover.el" (21684 61920 85144 668000))
 ;;; Generated autoloads from discover.el
 
 (autoload 'discover-show-context-menu "discover" "\
@@ -109,9 +110,16 @@ See `discover-mode' for more information on Discover mode.
 
 ;;;***
 
+;;;### (autoloads nil nil ("discover-pkg.el") (21684 61920 100656
+;;;;;;  348000))
+
+;;;***
+
+(provide 'discover-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; discover-autoloads.el ends here

@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads (heroku-run heroku-sql) "heroku" "heroku.el" (21120
-;;;;;;  39015 784501 945000))
+;;;### (autoloads (heroku-run heroku-sql) "heroku" "heroku.el" (21684
+;;;;;;  61893 356813 611000))
 ;;; Generated autoloads from heroku.el
 
 (autoload 'heroku-sql "heroku" "\
@@ -21,7 +21,7 @@ Run a remote command on a given app using `shell'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("heroku-pkg.el") (21120 39015 805796 663000))
+;;;### (autoloads nil nil ("heroku-pkg.el") (21684 61893 374909 406000))
 
 ;;;***
 

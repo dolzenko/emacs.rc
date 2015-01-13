@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (go-snippets-initialize) "go-snippets" "go-snippets.el"
-;;;;;;  (21180 15270 128 318000))
+;;;;;;  (21684 61841 48164 777000))
 ;;; Generated autoloads from go-snippets.el
 
 (autoload 'go-snippets-initialize "go-snippets" "\
@@ -16,8 +16,8 @@
 
 ;;;***
 
-;;;### (autoloads nil nil ("go-snippets-pkg.el") (21180 15270 19185
-;;;;;;  440000))
+;;;### (autoloads nil nil ("go-snippets-pkg.el") (21684 61841 144214
+;;;;;;  226000))
 
 ;;;***
 

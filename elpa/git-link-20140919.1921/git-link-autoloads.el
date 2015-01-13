@@ -1,10 +1,10 @@
 ;;; git-link-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "git-link" "git-link.el" (21557 6101 738512
-;;;;;;  317000))
+;;;### (autoloads (git-link-commit git-link) "git-link" "git-link.el"
+;;;;;;  (21684 61883 456690 908000))
 ;;; Generated autoloads from git-link.el
 
 (autoload 'git-link "git-link" "\
@@ -29,9 +29,16 @@ Defaults to \"origin\".
 
 ;;;***
 
+;;;### (autoloads nil nil ("git-link-pkg.el") (21684 61883 467308
+;;;;;;  552000))
+
+;;;***
+
+(provide 'git-link-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; git-link-autoloads.el ends here

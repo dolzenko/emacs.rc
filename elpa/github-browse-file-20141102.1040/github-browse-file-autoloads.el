@@ -1,10 +1,10 @@
 ;;; github-browse-file-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "github-browse-file" "github-browse-file.el"
-;;;;;;  (21591 42662 780778 141000))
+;;;### (autoloads (github-browse-file-blame github-browse-file) "github-browse-file"
+;;;;;;  "github-browse-file.el" (21684 61907 492988 741000))
 ;;; Generated autoloads from github-browse-file.el
 
 (autoload 'github-browse-file "github-browse-file" "\
@@ -29,9 +29,16 @@ region.
 
 ;;;***
 
+;;;### (autoloads nil nil ("github-browse-file-pkg.el") (21684 61907
+;;;;;;  515090 609000))
+
+;;;***
+
+(provide 'github-browse-file-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; github-browse-file-autoloads.el ends here

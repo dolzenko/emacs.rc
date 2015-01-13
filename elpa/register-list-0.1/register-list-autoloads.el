@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (register-list) "register-list" "register-list.el"
-;;;;;;  (20595 25680))
+;;;;;;  (21684 61825 263968 730000))
 ;;; Generated autoloads from register-list.el
 
 (autoload 'register-list "register-list" "\
@@ -24,7 +24,8 @@ The list is displayed in a buffer named `*Register List*' in
 
 ;;;***
 
-;;;### (autoloads nil nil ("register-list-pkg.el") (20595 25680 382806))
+;;;### (autoloads nil nil ("register-list-pkg.el") (21684 61825 284376
+;;;;;;  862000))
 
 ;;;***
 

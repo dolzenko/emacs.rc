@@ -1,10 +1,11 @@
 ;;; color-identifiers-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+
 
-;;;### (autoloads nil "color-identifiers-mode" "color-identifiers-mode.el"
-;;;;;;  (21554 19067 177364 687000))
+;;;### (autoloads (global-color-identifiers-mode color-identifiers-mode)
+;;;;;;  "color-identifiers-mode" "color-identifiers-mode.el" (21684
+;;;;;;  61810 559785 983000))
 ;;; Generated autoloads from color-identifiers-mode.el
 
 (autoload 'color-identifiers-mode "color-identifiers-mode" "\
@@ -35,9 +36,16 @@ See `color-identifiers-mode' for more information on Color-Identifiers mode.
 
 ;;;***
 
+;;;### (autoloads nil nil ("color-identifiers-mode-pkg.el") (21684
+;;;;;;  61810 578027 273000))
+
+;;;***
+
+(provide 'color-identifiers-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
+;; coding: utf-8
 ;; End:
 ;;; color-identifiers-mode-autoloads.el ends here

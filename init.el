@@ -108,8 +108,8 @@
 (require 'rinari)
 (setq rinari-tags-file-name "TAGS")
 
-(global-set-key (kbd "C-c t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
-(global-set-key (kbd "C-c C-t") 'rspec-toggle-spec-and-target) ;; C-c t instead of C-c ,t
+(global-set-key (kbd "C-c t") 'projectile-toggle-between-implementation-and-test) ;; C-c t instead of C-c ,t
+(global-set-key (kbd "C-c C-t") 'projectile-toggle-between-implementation-and-test) ;; C-c t instead of C-c ,t
 (custom-set-variables '(rspec-use-bundler-when-possible nil)
                       '(rspec-use-rake-flag t)
                       )

@@ -1054,7 +1054,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (add-hook 'ruby-mode-hook 'eldoc-mode)
 
 (require 'flymake-jslint)
-(add-hook 'js-mode-hook 'flymake-jslint-load)
+;; (add-hook 'js-mode-hook 'flymake-jslint-load)
 
 ;; make whitespace-mode use just basic coloring
 ;; (setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
@@ -1296,3 +1296,20 @@ If the file is emacs lisp, run the byte compiled version if exist."
             ;; (dirtrack-mode 1)
             ))
 ;; (setq-default dirtrack-list '("^\\(.+?\\) \\$" 1))
+(require 'auto-complete)
+(global-auto-complete-mode t)
+
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (smartscan-mode 1)
+            ))
+
+(add-hook 'go-mode-hook
+          (lambda ()
+            (smartscan-mode 1)
+            ))
+
+(add-hook 'coffee-mode-hook
+          (lambda ()
+            (smartscan-mode 1)
+            ))

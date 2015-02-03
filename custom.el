@@ -14,7 +14,7 @@
  '(global-auto-mark-mode t)
  '(global-visible-mark-mode t)
  '(go-command "godep go")
- '(go-test-args "-ginkgo.noColor=true" t)
+ '(go-test-args "-ginkgo.noColor=true -a" t)
  '(gofmt-command "goimports")
  '(grep-find-ignored-directories (quote (".git")))
  '(grep-find-ignored-files (quote ("*.bak")))

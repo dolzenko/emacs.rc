@@ -1313,3 +1313,21 @@ If the file is emacs lisp, run the byte compiled version if exist."
           (lambda ()
             (smartscan-mode 1)
             ))
+
+
+;; (require 'misc)
+;; (global-set-key (kbd "M-f") 'forward-to-word)
+;; (global-set-key (kbd "M-b") 'backward-to-word)
+
+(defun unpop-to-mark-command ()
+  "Unpop off mark ring. Does nothing if mark ring is empty."
+  (interactive)
+  (when mark-ring
+    (let ((pos (marker-position (car (last mark-ring)))))
+      (if (not (= (point) pos))
+          (goto-char pos)
+        (setq mark-ring (cons (copy-marker (mark-marker)) mark-ring))
+        (set-marker (mark-marker) pos)
+        (setq mark-ring (nbutlast mark-ring))
+        (goto-char (marker-position (car (last mark-ring))))))))
+(global-set-key (kbd "C-c C-SPC") 'unpop-to-mark-command)

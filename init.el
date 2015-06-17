@@ -1105,8 +1105,6 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (global-set-key (kbd "C-x 4 t") 'transpose-buffers)
 
 
-(global-set-key "\M-l" 'kill-this-buffer)
-(global-set-key "\M-K" 'kill-this-buffer)
 (defun frame-bck()
   (interactive)
   (other-window -1)
@@ -1187,6 +1185,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (require 'multiple-cursors)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 ;; Go
 (setq gofmt-command "goimports")
@@ -1331,3 +1330,11 @@ If the file is emacs lisp, run the byte compiled version if exist."
         (setq mark-ring (nbutlast mark-ring))
         (goto-char (marker-position (car (last mark-ring))))))))
 (global-set-key (kbd "C-c C-SPC") 'unpop-to-mark-command)
+
+
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
+(define-key yas-minor-mode-map (kbd "C-o") 'yas-expand)
+
+(totd-start)
+(setq magit-last-seen-setup-instructions "1.4.0")

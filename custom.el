@@ -22,6 +22,7 @@
  '(helm-google-suggest-use-curl-p t)
  '(ido-enable-flex-matching t)
  '(ido-max-work-file-list 50)
+ '(magit-pull-arguments (quote ("--rebase")))
  '(paradox-github-token t)
  '(rspec-spec-command "bundle exec rspec")
  '(rspec-use-bundler-when-possible nil)

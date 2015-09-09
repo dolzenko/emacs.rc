@@ -709,10 +709,10 @@
 
 ;; (require 'rvm)
 ;; (rvm-use-default) ;; use rvm's default ruby for the current Emacs session
-(ignore-errors
-(global-rbenv-mode)
-(setq rbenv-show-active-ruby-in-modeline nil)
-)
+;; (ignore-errors
+;; (global-rbenv-mode)
+;; (setq rbenv-show-active-ruby-in-modeline nil)
+;; )
 
 (defun clear-shell ()
   (interactive)
@@ -815,12 +815,12 @@ If the file is emacs lisp, run the byte compiled version if exist."
 (setq resize-mini-windows nil)
 
 ;; change magit diff colors
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")
-     (when (not window-system)
-       (set-face-background 'magit-item-highlight "black"))))
+;; (eval-after-load 'magit
+;;   '(progn
+;;      (set-face-foreground 'magit-diff-add "green3")
+;;      (set-face-foreground 'magit-diff-del "red3")
+;;      (when (not window-system)
+;;        (set-face-background 'magit-item-highlight "black"))))
 
 (defun find-file-at-point-with-line()
   "if file has an attached line num goto that line, ie boom.rb:12"
@@ -882,6 +882,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
   (add-to-list 'mode-line-buffer-identification
                '(:propertize (" " default-directory " ") face dired-directory)))
 (add-hook 'shell-mode-hook 'add-mode-line-dirtrack)
+
 
 
 ;; Show last two directories to the current file in modeline
@@ -1110,6 +1111,7 @@ If the file is emacs lisp, run the byte compiled version if exist."
   (other-window -1)
   )
 (define-key (current-global-map) (kbd "M-o") 'other-window)
+(define-key (current-global-map) (kbd "M-t") 'transpose-buffers)
 (define-key (current-global-map) (kbd "M-O") 'frame-bck)
 (global-set-key (kbd "C-c f") 'projectile-find-file)
 
@@ -1338,3 +1340,46 @@ If the file is emacs lisp, run the byte compiled version if exist."
 
 (totd-start)
 (setq magit-last-seen-setup-instructions "1.4.0")
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(defun ruby-eval-region()
+  "Prints the evaluation of Ruby statements in region to a new output buffer"
+  (interactive)
+  (let ((output-buffer "Ruby Output"))
+    (shell-command-on-region (mark) (point) "ruby" output-buffer)
+    (switch-to-buffer output-buffer)))
+
+(defun ruby-pretty-print()
+  "Pretty prints the evaluation of a Ruby expression in region to a new output buffer"
+  (interactive)
+  (save-excursion
+    (let ((code (buffer-substring (mark) (point)))
+          (code-buffer (generate-new-buffer "ruby-code")))
+      (switch-to-buffer code-buffer)
+      (insert (concat "require 'pp'\nputs (" code ")\n"))
+      (mark-whole-buffer)
+      (ruby-eval-region)
+      (kill-buffer code-buffer))))
+
+(defun increment-number-at-point ()
+  (interactive)
+  (skip-chars-backward "0123456789")
+  (or (looking-at "[0123456789]+")
+      (error "No number at point"))
+  (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
+(global-set-key (kbd "C-c +") 'increment-number-at-point)
+
+;; Make shure shell-switcher knows about all shell buffers
+(add-hook 'shell-mode-hook 'shell-switcher-manually-register-shell)
+
+;; Show current folder in window title
+(setq frame-title-format '((:eval default-directory)))
+
+(load "editorconfig")
+
+;; Allows to replace UNIX timestamps with formatted date.
+;; Use \,(format-timestamp) as a replacement string.
+(defun format-timestamp ()
+  "replaces timestamp with formatted date (use [0-9]\{10\} as query)"
+  (format-time-string "%Y-%m-%d %T UTC" (seconds-to-time (string-to-number (match-string 0))))
+  )

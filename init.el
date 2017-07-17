@@ -1375,7 +1375,8 @@ If the file is emacs lisp, run the byte compiled version if exist."
 ;; Show current folder in window title
 (setq frame-title-format '((:eval default-directory)))
 
-(load "editorconfig")
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 ;; Allows to replace UNIX timestamps with formatted date.
 ;; Use \,(format-timestamp) as a replacement string.
@@ -1383,3 +1384,57 @@ If the file is emacs lisp, run the byte compiled version if exist."
   "replaces timestamp with formatted date (use [0-9]\{10\} as query)"
   (format-time-string "%Y-%m-%d %T UTC" (seconds-to-time (string-to-number (match-string 0))))
   )
+
+(require 'epoch-view)
+
+(global-set-key (kbd "C-1") 'delete-other-windows)
+(global-set-key (kbd "C-2") 'split-window-below)
+(global-set-key (kbd "C-3") 'split-window-right)
+(global-set-key (kbd "C-0") 'delete-window)
+
+
+(defun sudo-edit-current-file ()
+  (interactive)
+  (let ((my-file-name) ; fill this with the file to open
+        (position))    ; if the file is already open save position
+    (if (equal major-mode 'dired-mode) ; test if we are in dired-mode
+        (progn
+          (setq my-file-name (dired-get-file-for-visit))
+          (find-alternate-file (prepare-tramp-sudo-string my-file-name)))
+      (setq my-file-name (buffer-file-name); hopefully anything else is an already opened file
+            position (point))
+      (find-alternate-file (prepare-tramp-sudo-string my-file-name))
+      (goto-char position))))
+
+
+(defun prepare-tramp-sudo-string (tempfile)
+  (if (file-remote-p tempfile)
+      (let ((vec (tramp-dissect-file-name tempfile)))
+
+        (tramp-make-tramp-file-name
+         "sudo"
+         (tramp-file-name-user nil)
+         (tramp-file-name-host vec)
+         (tramp-file-name-localname vec)
+         (format "ssh:%s@%s|"
+                 (tramp-file-name-user vec)
+                 (tramp-file-name-host vec))))
+    (concat "/sudo:root@localhost:" tempfile)))
+
+(define-key dired-mode-map [s-return] 'sudo-edit-current-file)
+
+(load "~/.emacs.private.el")
+(beacon-mode 1)
+(setq beacon-push-mark 35)
+(setq beacon-color "#666600")
+
+(require 'protobuf-mode)
+(defconst my-protobuf-style
+  '((c-basic-offset . 2)
+    (indent-tabs-mode . t)))
+
+(add-hook 'protobuf-mode-hook
+          (lambda () (c-add-style "my-style" my-protobuf-style t)))
+
+(toggle-scroll-bar -1)
+(sml-modeline-mode)
